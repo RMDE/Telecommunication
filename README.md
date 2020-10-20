@@ -18,7 +18,7 @@
 
   - 利用NS3部署一个LTE网络，具体参数如表所示
 
-    ![图片1](C:\Users\猫猫\Documents\XiaoMiNet\Upupoo\Docker\config\CLASS\网络通信\Telecommunication\pictures\图片1.png)
+    ![imge](https://github.com/RMDE/Telecommunication/blob/master/pictures/%E5%9B%BE%E7%89%871.png)
 
   - –绘制仿真的Radio Environment Map
 
