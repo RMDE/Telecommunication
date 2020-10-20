@@ -18,7 +18,7 @@
 
   - 利用NS3部署一个LTE网络，具体参数如表所示
 
-    ![imge](https://github.com/RMDE/Telecommunication/blob/master/pictures/%E5%9B%BE%E7%89%871.png)
+    ![image](https://github.com/RMDE/Telecommunication/blob/master/pictures/%E5%9B%BE%E7%89%871.png)
 
   - –绘制仿真的Radio Environment Map
 
