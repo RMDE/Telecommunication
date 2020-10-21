@@ -200,7 +200,7 @@ void* listener(__attribute__((unused)) void *unused)
     gettimeofday(&start,NULL);
 	for (;;) {
         gettimeofday(&end,NULL);
-        if((end.tv_sec-start.tv_sec)>10)
+        if((end.tv_sec-start.tv_sec)>1)
         {
             break;
         }
