@@ -2,6 +2,8 @@
 #include "tcpsyn.h"
 #include<stdlib.h>
 #include<string.h>
+#include<unistd.h>
+#include<sys/wait.h>
 
 Host host[MAX_LAN_NUM];
 int hostsum=0;
@@ -38,7 +40,7 @@ void syn()
 	GetIP();
 	for(int i=0;i<hostsum;i++)
 	{
-       //printf("Now scan: %s\n",host[1].ip);
+        printf("Now scan: %s\n",host[i].ip);
 		scan_tcp_ports(host[i].ip);
 	    // //pthread_join(g_listener_thread, NULL);
 	    // //pthread_join(g_scanner_thread, NULL);

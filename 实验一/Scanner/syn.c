@@ -1,6 +1,8 @@
 //refer to :https://github.com/venkat-abhi/Half-open-port-scanner.git
 #include<stdio.h>
 #include "syn.h"
+#include<unistd.h>
+#include<sys/wait.h>
 
 uint16_t csum(const void*,const int);
 uint16_t tcp_chksum(struct my_iph*,struct my_tcph*);
@@ -84,19 +86,33 @@ void perror_exit(const char *s)
 
 void scan_tcp_ports(char* ip)
 {
-	pthread_t* g_listener_thread,*g_scanner_thread;
-    g_listener_thread=(pthread_t*)malloc(sizeof(pthread_t));
-    g_scanner_thread=(pthread_t*)malloc(sizeof(pthread_t));
-    dest_host_name = ip;
-	set_raw_socket();
-	set_socket_options();
-
-	create_thread(LISTENER_THREAD,g_listener_thread);
-	create_thread(SCANNER_THREAD,g_scanner_thread);
-	pthread_join(*g_listener_thread, NULL);
-	pthread_join(*g_scanner_thread, NULL);
-    free(g_listener_thread);
-    free(g_scanner_thread);
+    int pid = fork();
+    if(pid==-1)
+    {
+        printf("process create error!\n");
+        exit(0);
+    }
+    if(pid == 0)
+    {
+	    pthread_t* g_listener_thread,*g_scanner_thread;
+        g_listener_thread=(pthread_t*)malloc(sizeof(pthread_t));
+        g_scanner_thread=(pthread_t*)malloc(sizeof(pthread_t));
+        dest_host_name = ip;
+	    set_raw_socket();
+	    set_socket_options();
+    
+	    create_thread(LISTENER_THREAD,g_listener_thread);
+	    create_thread(SCANNER_THREAD,g_scanner_thread);
+    	pthread_join(*g_listener_thread, NULL);
+	    pthread_join(*g_scanner_thread, NULL);
+        free(g_listener_thread);
+        free(g_scanner_thread);
+        _exit(0);
+    }
+    else
+    {
+        wait(NULL);
+    }
 }
 
 void* scanner(__attribute__((unused)) void *unused)
@@ -120,7 +136,7 @@ void* scanner(__attribute__((unused)) void *unused)
 	p_dest_addr.sin_port = htons(atoi(COMMS_PORT)); 
 	p_dest_addr.sin_addr.s_addr = snd_iph->dst_addr;
 
-    printf("Now Scan %s\n",inet_ntoa(p_dest_addr.sin_addr));
+    //printf("Now Scan %s\n",inet_ntoa(p_dest_addr.sin_addr));
 
 	for (int i = 1; i < 1024; ++i) {
 		snd_tcph->dst_port = htons(i);
@@ -180,7 +196,14 @@ void close_connection(uint16_t port, struct sockaddr_storage from_addr)
 void* listener(__attribute__((unused)) void *unused)
 {
     int count=0;
+    struct timeval start,end;
+    gettimeofday(&start,NULL);
 	for (;;) {
+        gettimeofday(&end,NULL);
+        if((end.tv_sec-start.tv_sec)>10)
+        {
+            break;
+        }
 		/* Packet received as reply from target */
 		char response_packet[IP_PCKT_MAX_LEN];
 
@@ -197,6 +220,10 @@ void* listener(__attribute__((unused)) void *unused)
 			perror("recvfrom: ");
 			continue;
 		}
+        if((end.tv_sec-start.tv_sec)>10)
+        {
+            break;
+        }
 
 		/* Get the pointers to the IP & TCP headers */
 		struct my_iph *recv_iph = (struct my_iph*)response_packet;
@@ -209,6 +236,10 @@ void* listener(__attribute__((unused)) void *unused)
 		}
         count++;
 
+        if((end.tv_sec-start.tv_sec)>10)
+        {
+            break;
+        }
 		/* Check if we the port is closed (denoted by a rst flag) */
 		if (recv_tcph->rst == 0x01) {
 			continue;
@@ -232,6 +263,10 @@ void* listener(__attribute__((unused)) void *unused)
 			discovered_ports[ntohs(recv_tcph->src_port)] = 1;
 			close_connection(ntohs(recv_tcph->src_port), from_addr);
 		}
+        if((end.tv_sec-start.tv_sec)>10)
+        {
+            break;
+        }
         if(count>=COUNT)
         {
             break;
