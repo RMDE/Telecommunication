@@ -200,6 +200,7 @@ void* listener(__attribute__((unused)) void *unused)
     gettimeofday(&start,NULL);
 	for (;;) {
         gettimeofday(&end,NULL);
+        count++;
         if((end.tv_sec-start.tv_sec)>1)
         {
             break;
@@ -234,7 +235,6 @@ void* listener(__attribute__((unused)) void *unused)
 		if (recv_tcph->dst_port != ntohs(atoi(COMMS_PORT))) {
 			continue;
 		}
-        count++;
 
         if((end.tv_sec-start.tv_sec)>10)
         {
