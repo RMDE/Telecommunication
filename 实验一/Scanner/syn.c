@@ -3,6 +3,7 @@
 #include "syn.h"
 #include<unistd.h>
 #include<sys/wait.h>
+#include<signal.h>
 
 uint16_t csum(const void*,const int);
 uint16_t tcp_chksum(struct my_iph*,struct my_tcph*);
@@ -196,82 +197,74 @@ void close_connection(uint16_t port, struct sockaddr_storage from_addr)
 void* listener(__attribute__((unused)) void *unused)
 {
     int count=0;
-    struct timeval start,end;
-    gettimeofday(&start,NULL);
-	for (;;) {
-        gettimeofday(&end,NULL);
-        count++;
-        if((end.tv_sec-start.tv_sec)>1)
-        {
-            break;
-        }
-		/* Packet received as reply from target */
-		char response_packet[IP_PCKT_MAX_LEN];
+    int pid=fork();
+    if(pid==0)
+    {
+	    for (;;) {
+		    /* Packet received as reply from target */
+		    char response_packet[IP_PCKT_MAX_LEN];
 
-		/* Zero out the buffer */
-		memset(response_packet, 0, IP_PCKT_MAX_LEN);
+		    /* Zero out the buffer */
+		    memset(response_packet, 0, IP_PCKT_MAX_LEN);
 
-		/* Holds the destination network information */
-		struct sockaddr_storage from_addr;
-		socklen_t from_len = 0;
+		    /* Holds the destination network information */
+		    struct sockaddr_storage from_addr;
+		    socklen_t from_len = 0;
 
-		/* Recieve the response from the target */
-		int byte_count = recvfrom(g_sockfd, response_packet, MAX_PCKT_LEN, 0, (struct sockaddr *)&from_addr, &from_len);
-		if (byte_count < 0 && errno != EAGAIN) {
-			perror("recvfrom: ");
-			continue;
-		}
-        if((end.tv_sec-start.tv_sec)>10)
-        {
-            break;
-        }
+		    /* Recieve the response from the target */
+		    int byte_count = recvfrom(g_sockfd, response_packet, MAX_PCKT_LEN, 0, (struct sockaddr *)&from_addr, &from_len);
+		    if (byte_count < 0 && errno != EAGAIN) {
+			    perror("recvfrom: ");
+			    continue;
+		    }
+            count++;
 
-		/* Get the pointers to the IP & TCP headers */
-		struct my_iph *recv_iph = (struct my_iph*)response_packet;
-		struct my_tcph *recv_tcph = (struct my_tcph*)(response_packet + 4 * (recv_iph->hdr_len));
+    		/* Get the pointers to the IP & TCP headers */
+	    	struct my_iph *recv_iph = (struct my_iph*)response_packet;
+		    struct my_tcph *recv_tcph = (struct my_tcph*)(response_packet + 4 * (recv_iph->hdr_len));
 
 
-		/* Check if the message is for COMMS_PORT port */
-		if (recv_tcph->dst_port != ntohs(atoi(COMMS_PORT))) {
-			continue;
-		}
+	    	/* Check if the message is for COMMS_PORT port */
+		    if (recv_tcph->dst_port != ntohs(atoi(COMMS_PORT))) {
+			    continue;
+		    }
 
-        if((end.tv_sec-start.tv_sec)>10)
-        {
-            break;
-        }
-		/* Check if we the port is closed (denoted by a rst flag) */
-		if (recv_tcph->rst == 0x01) {
-			continue;
-		}
+		    /* Check if we the port is closed (denoted by a rst flag) */
+		    if (recv_tcph->rst == 0x01) {
+			    continue;
+		    }
 
-		/* Check if the target is closing the connection (done if we haven't responded to it's acks) */
-		if (recv_tcph->fin == 0x01) {
-			continue;
-		}
+		    /* Check if the target is closing the connection (done if we haven't responded to it's acks) */
+		    if (recv_tcph->fin == 0x01) {
+			    continue;
+		    }
 
-		/* Check to see if we recived an ACK for a port */
-		if (recv_tcph->ack == 0x01 && recv_tcph->syn == 0x01) {
-			//printf("\nChecking port %d\n", ntohs(recv_tcph->src_port));
-			/* Check if ack is retransmitted due to delayed fin */
-			if (discovered_ports[ntohs(recv_tcph->src_port) == 1]) {
-				continue;
-			}
-			printf("[*] Port: %d is open.\n", ntohs(recv_tcph->src_port));
+		    /* Check to see if we recived an ACK for a port */
+		    if (recv_tcph->ack == 0x01 && recv_tcph->syn == 0x01) {
+			    //printf("\nChecking port %d\n", ntohs(recv_tcph->src_port));
+			    /* Check if ack is retransmitted due to delayed fin */
+			    if (discovered_ports[ntohs(recv_tcph->src_port) == 1]) {
+				    continue;
+			    }
+			    printf("[*] Port: %d is open.\n", ntohs(recv_tcph->src_port));
 
-			/* Close the connection */
-			discovered_ports[ntohs(recv_tcph->src_port)] = 1;
-			close_connection(ntohs(recv_tcph->src_port), from_addr);
-		}
-        if((end.tv_sec-start.tv_sec)>10)
-        {
-            break;
-        }
-        if(count>=COUNT)
-        {
-            break;
-        }
-	}
+			    /* Close the connection */
+			    discovered_ports[ntohs(recv_tcph->src_port)] = 1;
+			    close_connection(ntohs(recv_tcph->src_port), from_addr);
+		    }
+            if(count>=COUNT)
+            {
+                exit(0);
+            }
+	    }
+    }
+    else
+    {
+        sleep(5);    
+        kill(pid,SIGKILL);
+        wait(NULL);
+    }
+
 	return NULL;
 }
 
