@@ -1,2 +1,4 @@
-*.exe
-test.*
+*
+! *.c
+! *.h
+! Makefile

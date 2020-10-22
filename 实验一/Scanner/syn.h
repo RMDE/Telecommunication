@@ -25,7 +25,7 @@
 #define IP_PCKT_MAX_LEN 65536
 #define PORT_RANGE 1024
 
-#define COUNT 100
+#define COUNT 50
 
 struct my_iph 
 {
