@@ -1,0 +1,15 @@
+<Test>
+  <Name>tcp-close</Name>
+  <Result>PASS</Result>
+  <Time real="0.030" user="0.030" system="0.000"/>
+  <Test>
+    <Name>Testing connection closing with retransmissions</Name>
+    <Result>PASS</Result>
+    <Time real="0.020" user="0.020" system="0.000"/>
+  </Test>
+  <Test>
+    <Name>Testing connection closing with retransmissions</Name>
+    <Result>PASS</Result>
+    <Time real="0.010" user="0.010" system="0.000"/>
+  </Test>
+</Test>

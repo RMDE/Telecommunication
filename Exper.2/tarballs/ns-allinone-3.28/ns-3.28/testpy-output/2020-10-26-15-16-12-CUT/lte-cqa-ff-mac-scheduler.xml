@@ -1,0 +1,25 @@
+<Test>
+  <Name>lte-cqa-ff-mac-scheduler</Name>
+  <Result>PASS</Result>
+  <Time real="15.020" user="14.940" system="0.010"/>
+  <Test>
+    <Name>1 UEs, distance 100000 m</Name>
+    <Result>PASS</Result>
+    <Time real="1.440" user="1.420" system="0.010"/>
+  </Test>
+  <Test>
+    <Name>distances (m) = [ 0 4800 6000 10000 ]</Name>
+    <Result>PASS</Result>
+    <Time real="5.040" user="5.030" system="0.000"/>
+  </Test>
+  <Test>
+    <Name>distances (m) = [ 0 4800 6000 10000 ]</Name>
+    <Result>PASS</Result>
+    <Time real="4.910" user="4.900" system="0.000"/>
+  </Test>
+  <Test>
+    <Name>distances (m) = [ 0 4800 6000 ]</Name>
+    <Result>PASS</Result>
+    <Time real="3.630" user="3.590" system="0.000"/>
+  </Test>
+</Test>

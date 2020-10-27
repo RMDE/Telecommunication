@@ -1,0 +1,15 @@
+<Test>
+  <Name>lte-fdtbfq-ff-mac-scheduler</Name>
+  <Result>PASS</Result>
+  <Time real="8.380" user="8.350" system="0.000"/>
+  <Test>
+    <Name>1 UEs, distance 100000 m</Name>
+    <Result>PASS</Result>
+    <Time real="1.250" user="1.240" system="0.000"/>
+  </Test>
+  <Test>
+    <Name>distances (m) = [ 0 4800 6000 ]</Name>
+    <Result>PASS</Result>
+    <Time real="7.130" user="7.110" system="0.000"/>
+  </Test>
+</Test>
