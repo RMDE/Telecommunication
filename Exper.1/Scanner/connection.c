@@ -1,4 +1,10 @@
-//function: using connect function of socket to scanner
+/*****************************************************************************
+** Author   : Ye Xi
+** ID       : 161720110
+** Class    : 1617204
+** Github   : https://github.com/RMDE/Telecommunication/Expr.1/Scanner/connection.c 
+** function : using connect function of socket to scanner
+*****************************************************************************/
 #include <sys/socket.h>
 #include <stdbool.h>
 #include <netinet/in.h>

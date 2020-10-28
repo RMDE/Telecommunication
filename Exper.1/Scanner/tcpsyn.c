@@ -1,3 +1,9 @@
+/*****************************************************************************
+** Author : Ye Xi
+** ID     : 161720110
+** Class  : 1617204
+** Github : https://github.com/RMDE/Telecommunication/Expr.1/Scanner/tcpsyn.c
+*****************************************************************************/
 #include<stdio.h>
 #include "tcpsyn.h"
 #include<stdlib.h>

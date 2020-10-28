@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
 
     // 定义 CommandLine 对象，以供外部传入参数
 
-    CommandLine cmd;
+    CommandLine cmd; // 添加命令行参数
 
     cmd.AddValue("nSta", "Number of Wifi STA devices", nSta);
 

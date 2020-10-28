@@ -1,3 +1,9 @@
+/*****************************************************************************
+** Author : Ye Xi
+** ID     : 161720110
+** Class  : 1617204
+** Github : https://github.com/RMDE/Telecommunication/Expr.1/Scanner/main.c 
+*****************************************************************************/
 #include<stdlib.h>
 #include<sys/time.h>
 #include<stdio.h>

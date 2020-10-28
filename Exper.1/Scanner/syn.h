@@ -1,3 +1,10 @@
+/*****************************************************************************
+** Author : Ye Xi
+** ID     : 161720110
+** Class  : 1617204
+** Github : https://github.com/RMDE/Telecommunication/Expr.1/Scanner/syn.h
+*****************************************************************************/
+
 #ifndef _SYN_H_
 #define _SYN_H_
 //refer to:https://github.com/venkat-abhi/Half-open-port-scanner.git 
