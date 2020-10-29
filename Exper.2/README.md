@@ -186,7 +186,7 @@
      - `Gustavo’s ns-3-pyviz`的可视化软件
 
        ```bash
-       sudo apt-get install python-pygraphviz python-kiwi python-pygoocanvas libgoocanvas-dev
+       sudo apt-get install python-pygraphviz python-kiwi python-pygoocanvas libgoocanvas-dev mercurial qt5-default
        ```
 
      - 支持`openflow `模块
@@ -318,7 +318,93 @@
 
        ![8](C:\Users\猫猫\Documents\XiaoMiNet\Upupoo\Docker\config\CLASS\网络通信\Telecommunication\pictures\8.png)
 
+   - 另一种方法进行脚本运行
+
+     - 将`.cc`文件放入`scratch`目录下
+
+     - 编译
+
+       ```bash
+       ./waf
+       ```
+
+     - 运行脚本
+
+       ```bash
+       ./waf --run scratch/star
+       ```
+
+   - 代码可视化
+
+     - 安装`NetAnim`
+
+       这是一个基于`Qt5`的`NS3`可视化程序，它的源码也一同附带在了`NS3`的源码包中，我们要做的就是使用`Qt5`编译它
+
+       - 首先需要安装`Qt5`和`Mercurial`
+
+         ```bash
+         sudo apt-get install mercurial
+         sudo apt-get install qt5-default
+         ```
+
+       - 使用`Qt5`的编译器`qmake`进行编译
+
+         ```bash
+         cd ns-allinone-3.28/netanim-3.108
+         qmake ./NetAnim.pro
+         ```
+
+       - 打开`NetAnim`程序
+
+         ```bash
+         ./NetAnim
+         ```
+
+         ![9](C:\Users\猫猫\Documents\XiaoMiNet\Upupoo\Docker\config\CLASS\网络通信\Telecommunication\pictures\9.png)
+
+   - 吞吐量工具
+
+     - 安装`gnuplot`和`gawk`
+
+       ```bash
+       sudo apt-get install gnuplot
+       sudo apt-get install gawk
+       ```
+
+       这是一个根据`NS3`脚本运行时产生的`trace`文件生成图标的软件，这里提供了一个用于求吞吐量的`awk`脚本，也就是`throughout.awk`
+
+     - 具体使用方法
+
+       - 将脚本放在`waf`同级目录下
+
+       - 存入数据`XXX`
+
+         ```bash
+         gawk -f throughout.awk xxx.tr > xxx
+         #xxx.tr是脚本运行过程中生成的.tr文件
+         ```
+
+       - 使用`gnuplot`来画图
+
+         - 进入`gnuplot`的`shell`
+
+           ```bash
+           gnuplot
+           ```
+
+         - 画图
+
+           ```
+           plot "xxx" with lines
+           ```
+
 2. #### 代码
+
+   ```
+   
+   ```
+
+   
 
 3. #### 实践结果
 
