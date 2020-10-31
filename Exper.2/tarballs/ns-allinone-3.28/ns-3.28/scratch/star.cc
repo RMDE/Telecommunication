@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
 
         "DeltaX", DoubleValue(5.0),
 
-        "DeltaY", DoubleValue(10.0),
+        "DeltaY", DoubleValue(5.0),
 
         "GridWidth", UintegerValue(3),
 
@@ -214,7 +214,7 @@ int main(int argc, char *argv[]) {
 
     // 安装 echo 服务
 
-    UdpEchoServerHelper echoServer(9);
+    UdpEchoServerHelper echoServer(8000);
 
     ApplicationContainer serverApps = echoServer.Install(staNodes.Get(0));
 
