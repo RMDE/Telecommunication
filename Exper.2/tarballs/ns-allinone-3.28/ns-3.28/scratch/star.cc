@@ -27,7 +27,7 @@ int main(int argc,char* argv[])
 {
 	
 	unsigned int number = 6; // STA节点数量
-	// 命令行参数设置 用法：./waf --run "scratch/StarNet --n=5"
+	// 命令行参数设置 用法：./waf --run "scratch/star --n=5"
 	CommandLine cmd;
 	// 设定star节点数
 	cmd.AddValue("n","Number of star devices",number);
