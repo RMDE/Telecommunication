@@ -94,7 +94,55 @@
       | 8. 开始仿真               |                                                              |
 
 - 星型无线网络
+
+  - 定义 ： 是指网络中的各节点设备通过一个网络集中设备（如集线器HUB或者交换机Switch）连接在一起，各节点呈星状分布的网络连接方式。这种拓扑结构主要应用于IEEE 802.2、IEEE 802.3标准的以太网中。
+
+  - 结构图
+
+    ![10](C:\Users\猫猫\Documents\XiaoMiNet\Upupoo\Docker\config\CLASS\网络通信\Telecommunication\pictures\10.jpg)
+
+  - 特点 ： 
+
+    - 容易实现，但安装、维护工作量，成本较大：它所采用的传输介质一般都是采用通用的双绞线或同轴电缆。但是每个站点都要和中央网络集中设备直接连接，需要耗费大量的线缆，并且安装，维护的工作量也剧增。
+    - 节点扩展、移动方便：节点扩展时只需要从集线器或交换机等集中设备中拉一条电缆即可，而要移动一个节点只需要把相应节点设备移到新节点即可。
+    - 故障诊断和隔离容易：一个节点出现故障不会影响其它节点的连接，可任意拆走故障节点；
+    - 中央节点的负担较重，易形成瓶颈；各站点的分布处理能力较低：中央节点一旦发生故障，则整个网络都受到影响。
+
+  - 优点 ：
+
+    - 网络结构简单，便于管理、维护和调试。
+    - 控制简单，添加或删除某个站点非常容易。
+    - 集中管理，可方便地提供服务和网络重新配置。
+    - 每个站点直接连到中央节点，容易检测和隔离故障
+
+  - 缺点 ：
+
+    - 线路利用率不高，一条线路只被该线路上的中央节点和一个节点使用。
+    - 中央节点负荷太重，而且当中央节点产生故障时，全网将不能工作，对中央节点的可靠性和冗余度要求太高
+    - 安装和维护费用高，需要大量电缆。
+
 - 多跳无线网络
+
+  - 定义 ：是一种无中心自组织的多跳无线网络，它不以任何已有的固定设施为基础而能随时随地组建临时性网络。它是具有特殊用途的对等式网络, 使用无线通信技术 ,网络中的节点互相作为其邻居（在其直接通信范围内的节点）的路由器 ,通过节点转发实现节点间的通信。 
+
+  - 结构图　
+
+    ![9](C:\Users\猫猫\Documents\XiaoMiNet\Upupoo\Docker\config\CLASS\网络通信\Telecommunication\pictures\9.jpg)
+
+  - 特点 ：
+    - 自组织。这种网络可以不需要任何预先架设的无线通信基础设施，所有节点通过分层协议体系与分布式算法，来协调每个结点各自的行为。结点可以快速，自主和独立的组网
+    - 对等结构 
+    - 多跳路由 
+    - 拓扑动态变化
+  - 优点 ：
+    - 快速部署和易于安装。安装Mesh节点非常简单，将设备从包装盒里取出来，接上电源就行了。用户可以很容易增加新的节点来扩大无线网路的覆盖范围和网路容量。
+    - 非视距传输（NLOS），利用无线Mesh技术可以很容易实现配置，因此在室外和办公场所有着广泛的应用前景。
+    - 健壮性，实现网路健壮性通常的方法是使用多路由传输数据。Mesh网路比单跳网路更加健壮，因为它不依赖于某一个单一节点的性能。在单跳网络中，如果某一节点出现故障，整个网路也就随之瘫痪。而在Mesh网路结构中，由于每个节点都有一条或几条传送数据的路径。如果最近的节点出现故障或者受到干扰，数据包将自动路由到备用路径继续进行传输，整个网路的运行不会受到影响。
+    - 结构灵活，在单跳网络中，设备必须共享AP。如果几个设备要同时访问网络，就可能产生通信拥塞并导致系统的运行速度降低。而在多跳网络中，设备可以通过不同的节点同时连接网络，因此不会导致系统性能的降低。
+    - 高带宽，无线通信的物理特性决定了通信传输的距离越短就越容易获得高带宽，因为随着无线传输距离的增加，各种干扰和其他导致数据丢失的因素随之增加。因此选择经多个短跳来传输数据将是获得更高网络带宽的一种有效方法。
+  - 缺点 ：
+    - 延迟，由于每次转发都需要一定延迟，多次转发之后延迟较高。
+    - 网络容量，由于网络存在转发，每次转发之后速率都会降低，因此需要限制每个网络中节点的数量，所以网络节点数量尽量不要太多，否则会影响业务质量。
 
 ### 实验实践
 
@@ -639,7 +687,149 @@
    - 多跳无线网络
 
      ```c++
+     /*****************************************************************************
+     ** Author : Ye Xi
+     ** ID     : 161720110
+     ** Class  : 1617204
+     ** Github : https://github.com/Telecommunication/Exper.2/adhoc.cc 
+     *****************************************************************************/
+     #include "ns3/internet-stack-helper.h"
+     #include "ns3/core-module.h"
+     #include "ns3/point-to-point-module.h"
+     #include "ns3/network-module.h"
+     #include "ns3/applications-module.h"
+     #include "ns3/wifi-module.h"
+     #include "ns3/mobility-module.h"
+     #include "ns3/csma-module.h"
+     #include "ns3/internet-module.h"
+     #include "ns3/netanim-module.h"
+     #include "ns3/yans-wifi-helper.h"
+     #include "ns3/ssid.h"
+     #include <iostream>
+     #define TIME 20.0
+     #define PORT 8000
+     using namespace std;
+     using namespace ns3;
      
+     // 日志设定
+     NS_LOG_COMPONENT_DEFINE ("AdhocWirelessNetwork"); // 使用NS_LOG定义一个日志模块
+     
+     int main(int argc,char* argv[])
+     {
+     	Time::SetResolution(Time::NS); // 设置时间分辨率	
+     
+     	unsigned int number = 7; // STA节点数量
+     	// 命令行参数设置 用法：./waf --run "scratch/star --n=5"
+     	CommandLine cmd;
+     	// 设定star节点数
+     	cmd.AddValue("n","Number of star devices",number);
+     	while(number<6 || number>15)
+     	{
+     		cout<<"Error:The number of the star devices should between 5 and 15"<<endl;
+     		cout<<"Please enter the number again:";
+     		cin>>number;
+     	}
+     	// 设置 trace
+     	bool tracing = true;
+     	cmd.AddValue("t","Wether turn on pcap tracing",tracing);
+     	cmd.Parse(argc,argv);
+     	
+     	// 启用日志
+     	LogComponentEnable("AdhocWirelessNetwork",LOG_LEVEL_ALL);
+     	LogComponentEnable("PacketSink",LOG_LEVEL_ALL); // 使日志组件生效
+     	// LOG_ERROR -- 记录错误信息
+     	// LOG_WARN -- 记录警告信息
+     	// LOG_DEBUG -- 记录调试信息
+     	// LOG_INFO -- 记录程序相关信息
+     	// LOG_FUNCTION -- 记录函数调用信息
+     	// LOG_LOGIC -- 对于整体逻辑的描述
+     	// LOG_ALL -- 包含上述所有信息
+     	
+     	// 创建节点
+     	NodeContainer nodes;
+     	nodes.Create(number);
+     	
+     	// 配置通信信道和物理层信息
+     	YansWifiChannelHelper channel = YansWifiChannelHelper::Default(); // 设置默认通道
+     	YansWifiPhyHelper phy = YansWifiPhyHelper::Default(); 		  // 配置phy助手
+     	phy.SetChannel (channel.Create()); 				  // 使每一个phy与Channel相关联
+      
+     	// 远程基站管理 使用AARF速率控制算法
+       	WifiHelper wifi; // 创建wifi助手,有助于创建WifiNetDevice对象
+       	wifi.SetRemoteStationManager("ns3::ConstantRateWifiManager",
+     				     "DataMode",StringValue("OfdmRate6Mbps"));
+             // 设置wifi助手对象的速率控制算法类型：固定速率算法
+      
+     	// 配置MAC与网卡
+       	WifiMacHelper mac;
+       	mac.SetType("ns3::AdhocWifiMac", 	 // 设置类型
+                         "Slot",StringValue("1s"));   // 插槽值 
+       	NetDeviceContainer Devices; 
+       	Devices = wifi.Install(phy,mac,nodes);	 // 设置节点网卡
+       	
+     	// 设置节点位置
+       	MobilityHelper mobility; 
+       	// 设置位置分配器，用于分配初始化的每个节点的初始位置。
+      	mobility.SetPositionAllocator("ns3::GridPositionAllocator",           // 设置移动模型的类型(在矩形2d网格上分配位置)
+                 			       "MinX",DoubleValue(0.0),               // 网格开始的x坐标
+            				       "MinY",DoubleValue(0.0),               // 网格开始的y坐标
+     		               	       "DeltaX",DoubleValue(10.0),            // 对象之间的x间隔
+                   			       "DeltaY",DoubleValue(10.0),           // 对象之间的y间隔
+                  			       "GridWidth",UintegerValue(4),          // 在一行中排列的对象数
+              			       "LayoutType",StringValue("RowFirst")); // 布局类型（竖排）
+      	mobility.SetMobilityModel("ns3::RandomWalk2dMobilityModel",            	       	   // 节点在随机方向上以随机速度围绕边界框移动
+                  			   "Bounds",RectangleValue(Rectangle(-50,50,-50,50))); // 界限属性(矩形的范围)
+       	mobility.Install(nodes); 
+      
+       	// 安装协议栈 
+       	InternetStackHelper stack; 
+      	stack.Install(nodes);
+      
+       	// 给设备接口分配IP地址 
+      	Ipv4AddressHelper address;
+     	address.SetBase("10.1.1.0","255.255.255.0");
+       	Ipv4InterfaceContainer interface;      // 用于获取节点的ip地址
+       	interface = address.Assign(Devices);
+      
+     	NS_LOG_INFO("Create Applications"); // 日志结点
+     	// On,Off随机替换，OFF模式无流量，ON模式产生恒定速率流量
+     	OnOffHelper onOff1("ns3::TcpSocketFactory",
+     			    Address(InetSocketAddress(interface.GetAddress(0), PORT))); 
+     	onOff1.SetAttribute("OnTime",
+     			    StringValue("ns3::ConstantRandomVariable[Constant=1]")); // 在固定时间打开
+     	onOff1.SetAttribute("OffTime", 
+     			    StringValue("ns3::ConstantRandomVariable[Constant=0]")); // 关闭时间随机	
+      	ApplicationContainer apps1 = onOff1.Install(nodes);
+     	apps1.Start(Seconds(1.0));
+     	apps1.Stop(Seconds(TIME));
+     	PacketSinkHelper sinkHelper("ns3::TcpSocketFactory",
+     			   	    Address(InetSocketAddress(Ipv4Address::GetAny(), PORT)));
+     	ApplicationContainer apps2 = sinkHelper.Install(nodes.Get(0));
+         	apps2.Start(Seconds(1.0));
+     	apps2.Stop(Seconds(TIME));
+       	
+     	// 启用互联网络路由 
+       	Ipv4GlobalRoutingHelper::PopulateRoutingTables();
+      
+      
+      
+       	Simulator::Stop(Seconds(TIME)); // 运行一段时间后自动关闭模拟器
+     	// 开启trace记录
+       	if(tracing==true) 
+         	{
+           		phy.EnablePcap("AdhocWifiNet",Devices.Get(0));
+       		AnimationInterface anim("AdhocWifiNet.xml"); // 动画保存，用于后期复现
+     		AsciiTraceHelper trace;
+     		phy.EnableAsciiAll(trace.CreateFileStream("AdhocWifiNet.tr"));
+     		//包含两个方法调用。
+     		//CreateFileStream()用未命名的对象在协议栈中创建了一个文件流,并把这个文件流传递给了调用方法,即创建了一个对象代表着一个名为“first.tr”的文件
+     		//EnableAsciiAll()告诉helper你想要将ASCII tracing安装在仿真中的点到点设备上,并且你想要接收端以ASCII格式写出数据包移动信息。
+         	}
+          
+     	Simulator::Run();
+      	Simulator::Destroy();
+       	return 0;
+     }
      ```
 
      - 图形化运行结果
@@ -678,7 +868,6 @@
        ```
 
        ![res2_3](C:\Users\猫猫\Documents\XiaoMiNet\Upupoo\Docker\config\CLASS\网络通信\Telecommunication\pictures\res2_3.png)
-
 
 ------
 
