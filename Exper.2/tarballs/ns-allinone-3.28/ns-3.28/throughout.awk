@@ -6,9 +6,9 @@ BEGIN {
 
 	FS="[() \t]";#field seperator is ')' or'('or ' '
 
-	myScrIP = "10.1.1.6";#This is the link that we pay attention to
+	myScrIP = "10.1.1.3";#This is the link that we pay attention to
 
-	myDstIP = "10.1.1.1";
+	myDstIP = "10.1.3.4";
 
 }
 
@@ -42,7 +42,7 @@ BEGIN {
 
             dstIP = $(i+1);
 
-            if(match(srcIP, myScrIP) && match(dstIP, myDstIP) )#link matches
+            if((match(srcIP, myScrIP) && match(dstIP, myDstIP)))#link matches
 
             {
 
@@ -110,7 +110,7 @@ END {
 
         for(j=1 ; j<cnt;j++){
 
-            throughput = (pkt_byte_sum[j] / (end_time[j] - start_time[0]))*8/1000;
+            throughput = (pkt_byte_sum[j] / (end_time[j] - start_time[0]))*8/(1024*1024);
 
             printf("%s\t%s\n", end_time[j], throughput );
 

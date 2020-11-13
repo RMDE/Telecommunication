@@ -16,6 +16,7 @@
 #include "ns3/netanim-module.h"
 #include "ns3/yans-wifi-helper.h"
 #include "ns3/ssid.h"
+#include "ns3/flow-monitor-module.h"
 #include <iostream>
 #define TIME 20.0
 #define PORT 8000
@@ -29,12 +30,12 @@ int main(int argc,char* argv[])
 {
 	Time::SetResolution(Time::NS); // 设置时间分辨率	
 
-	unsigned int number = 7; // STA节点数量
+	unsigned int number = 4; // STA节点数量
 	// 命令行参数设置 用法：./waf --run "scratch/star --n=5"
 	CommandLine cmd;
 	// 设定star节点数
 	cmd.AddValue("n","Number of star devices",number);
-	while(number<6 || number>15)
+	while(number<3 || number>15)
 	{
 		cout<<"Error:The number of the star devices should between 5 and 15"<<endl;
 		cout<<"Please enter the number again:";
@@ -46,123 +47,123 @@ int main(int argc,char* argv[])
 	cmd.Parse(argc,argv);
 	
 	// 启用日志
-	LogComponentEnable("AdhocWirelessNetwork",LOG_LEVEL_ALL);
-	LogComponentEnable("PacketSink",LOG_LEVEL_ALL); // 使日志组件生效
-	// LOG_ERROR -- 记录错误信息
-	// LOG_WARN -- 记录警告信息
-	// LOG_DEBUG -- 记录调试信息
-	// LOG_INFO -- 记录程序相关信息
-	// LOG_FUNCTION -- 记录函数调用信息
-	// LOG_LOGIC -- 对于整体逻辑的描述
-	// LOG_ALL -- 包含上述所有信息
+	LogComponentEnable("UdpEchoClientApplication",LOG_LEVEL_ALL);
+	LogComponentEnable("UdpEchoServerApplication",LOG_LEVEL_ALL); // 使日志组件生效
 	
 	// 创建节点
-	NodeContainer nodes;
-	nodes.Create(number);
+	NodeContainer nodes1;
+	nodes1.Create(number);
+	NodeContainer nodes2;
+	nodes2.Add(nodes1.Get(0));
+	nodes2.Create(number);
+	NodeContainer nodes3;
+	nodes3.Add(nodes2.Get(3));
+	nodes3.Create(number);
+	
 	
 	// 配置通信信道和物理层信息
-	YansWifiChannelHelper channel = YansWifiChannelHelper::Default(); // 设置默认通道
-	YansWifiPhyHelper phy = YansWifiPhyHelper::Default(); 		  // 配置phy助手
-	phy.SetChannel (channel.Create()); 				  // 使每一个phy与Channel相关联
+	YansWifiChannelHelper channel1 = YansWifiChannelHelper::Default(); 
+	YansWifiPhyHelper phy1 = YansWifiPhyHelper::Default(); 		
+	phy1.SetChannel (channel1.Create()); 				  
+	YansWifiChannelHelper channel2 = YansWifiChannelHelper::Default();
+	YansWifiPhyHelper phy2 = YansWifiPhyHelper::Default(); 		 
+	phy2.SetChannel (channel2.Create());
+	YansWifiChannelHelper channel3 = YansWifiChannelHelper::Default(); 
+	YansWifiPhyHelper phy3 = YansWifiPhyHelper::Default();
+	phy3.SetChannel (channel3.Create()); 				  
  
-	// 远程基站管理 使用AARF速率控制算法
-  	WifiHelper wifi; // 创建wifi助手,有助于创建WifiNetDevice对象
-  	wifi.SetRemoteStationManager("ns3::ConstantRateWifiManager",
-				     "DataMode",StringValue("OfdmRate6Mbps"));
-        // 设置wifi助手对象的速率控制算法类型：固定速率算法
-	// AarfcdWifiManager : 在判断是否增加速率之前，该算法会打开RTS/CTS机制，当数目可变的传输尝试成功之后会再次关闭RTS/CTS机制。
-	//		       AARF-CD算法保留了ARF中的定时器，提高了传输多媒体资源时的性能。
-	//		       该算法最大的贡献就是通过碰撞检测即加入RTS/CTS机制解决了传输时的资源竞争问题。
-	// AarfWifiManager : 速率控制算法。在ARF基础之上演变，旨在提高稳定环境下的性能（采取自适应的阈值更新）。
-	// 		     在稳定的信道环境中扩大了增加速率时的时间间隔，产生更小的速率波动。
-	// AmrrWifiManager : 使用二进制指数退避（BEB）技术来适应用于改变速率和传输计数参数值的采样周期的长度（阈值）。
-	// 		     使用探测包，并根据其传输状态自适应地改变阈值。 
-	//		     适应机制通过不由倒退机制指定的更高速率来确保更少的故障传输/重传和更高的吞吐量。
-	//		     采用启发式方法，通过明智地设置速率和传输计数参数来捕获信道的短期变化。
-	// AparfWifiManager : 用于决定数据速率或发射功率变化的阈值是动态调整的。 
-	// ArfWifiManager : 以一个非常低的基础的数据速率（2Mbps）开始，然后触发一个定时器
-	// 		    当任意一个定时器停止或发送机成功的进行了N次连续的传输后，发射器从旧数据速率rold增到一个新值rnew，并重置定时器，
-	//		    每次增加固定值，若增加后第一次传输就失败，则退回到旧速率rold，如果再次发送失败，则依固定的值递减。
-	//		    ARF将帧丢失率视为信道条件的指标。根据连续成功的传输次数调整速率。
-	// CaraWifiManager : 和ARF类似。对传输成功的次数进行计数，连续传输失败的计数器将会被重置。
-	//		     当连续成功的次数达到指定的阀值后，就会增加速率。
-	// ConstantRateWifiManager : 总是使用相同的速率发送一个包
-	// IdealWifiManager : 理想状态下，用于进行实验对比
-	// MinstrelHtWifiManager : 是基于Minstrel的802.11n/ac标准的速率适配机制，并且基于探测频道以动态学习可支持的工作速率的方法。
-	//			   为实现多速率重试（MRR）链的高延迟设备而设计。
-	// MinstrelWifiManager : 根据收集成功传播概率的统计资料，探索环境，调整速度。
-	//			 将速率调整到其认为成功的最高速率，并花费其一小部分时间通过尝试其他速率“周围环顾”。
-	// OnoeWifiManager : 被用作madwifi驱动程序的默认速率控制算法。
-	//		     其中信用值根据成功发送的数量和在确定的采样周期上积累的错误传输和重传的数量来确定。 
-	// 		     对于以特定速率的成功传输，Onoe不断提高其信用额度，达到某些阈值时，当前的传输速率将提高到下一个更高的速率。
-	// ParfWifiManager : 功率控制自动速率回退技术。基于发射功率和数据速率控制而提出的一种自我调节技术。 
-	//		     尝试最小化基于自动速率回退（ARF）的相邻AP之间的干扰
-	// RraaWifiManager : 鲁棒速率适应算法有两个机制：速率选择器（RRAA-BASIC）和自适应RTS（ARts）。
-	//		     速率选择器计算在一个观测窗口内，发送失败传输的次数，在该窗口结束的时候，计算丢包率，如果丢包率比给定的阀值PMTL大，速率就减少。
-	// RrpaaWifiManager : 实现了基于帧丢失率的功率和速率控制机制。 尝试使用尽可能低的功率，而不会降低链路的性能。
-	//		      先尝试在当前信道条件下找到最大功率的最佳速率，然后如果损耗稳定开始降低功率。
+	// 远程基站管理 使用ARF速率控制算法
+  	WifiHelper wifi1; // 创建wifi助手,有助于创建WifiNetDevice对象
+	wifi1.SetRemoteStationManager("ns3::ConstantRateWifiManager",
+                                     "DataMode",StringValue("OfdmRate6Mbps"));
+  	WifiHelper wifi2; 
+	wifi1.SetRemoteStationManager("ns3::ConstantRateWifiManager",
+                                     "DataMode",StringValue("OfdmRate6Mbps"));
+  	WifiHelper wifi3; 
+	wifi1.SetRemoteStationManager("ns3::ConstantRateWifiManager",
+                                     "DataMode",StringValue("OfdmRate6Mbps"));
  
 	// 配置MAC与网卡
   	WifiMacHelper mac;
   	mac.SetType("ns3::AdhocWifiMac", 	 // 设置类型
                     "Slot",StringValue("1s"));   // 插槽值 
-  	NetDeviceContainer Devices; 
-  	Devices = wifi.Install(phy,mac,nodes);	 // 设置节点网卡
+  	NetDeviceContainer Devices1,Devices2,Devices3; 
+  	Devices1 = wifi1.Install(phy1,mac,nodes1);	 // 设置节点网卡
+  	Devices2 = wifi2.Install(phy2,mac,nodes2);	 
+  	Devices3 = wifi3.Install(phy3,mac,nodes3);	 
   	
 	// 设置节点位置
   	MobilityHelper mobility; 
   	// 设置位置分配器，用于分配初始化的每个节点的初始位置。
- 	mobility.SetPositionAllocator("ns3::GridPositionAllocator",           // 设置移动模型的类型(在矩形2d网格上分配位置)
-            			       "MinX",DoubleValue(0.0),               // 网格开始的x坐标
-       				       "MinY",DoubleValue(0.0),               // 网格开始的y坐标
-		               	       "DeltaX",DoubleValue(10.0),            // 对象之间的x间隔
-              			       "DeltaY",DoubleValue(10.0),           // 对象之间的y间隔
-             			       "GridWidth",UintegerValue(4),          // 在一行中排列的对象数
-         			       "LayoutType",StringValue("RowFirst")); // 布局类型（竖排）
- 	mobility.SetMobilityModel("ns3::RandomWalk2dMobilityModel",            	       	   // 节点在随机方向上以随机速度围绕边界框移动
-             			   "Bounds",RectangleValue(Rectangle(-50,50,-50,50))); // 界限属性(矩形的范围)
-  	mobility.Install(nodes); 
+ 	mobility.SetPositionAllocator("ns3::GridPositionAllocator",          
+            			      "MinX",DoubleValue(0.0),             
+       				      "MinY",DoubleValue(0.0),              
+		               	      "DeltaX",DoubleValue(15.0),        
+              			      "DeltaY",DoubleValue(15.0),       
+             			      "GridWidth",UintegerValue(5),         
+         			      "LayoutType",StringValue("RowFirst"));
+ 	mobility.SetMobilityModel("ns3::ConstantPositionMobilityModel"); 
+  	mobility.Install(nodes1); 
+  	mobility.Install(nodes2); 
+  	mobility.Install(nodes3); 
  
   	// 安装协议栈 
   	InternetStackHelper stack; 
- 	stack.Install(nodes);
+ 	stack.Install(nodes1.Get(1));
+ 	stack.Install(nodes1.Get(2));
+ 	stack.Install(nodes1.Get(3));
+ 	stack.Install(nodes2);
+ 	stack.Install(nodes3.Get(1));
+ 	stack.Install(nodes3.Get(2));
+ 	stack.Install(nodes3.Get(3));
+ 	stack.Install(nodes3.Get(4));
  
   	// 给设备接口分配IP地址 
  	Ipv4AddressHelper address;
 	address.SetBase("10.1.1.0","255.255.255.0");
-  	Ipv4InterfaceContainer interface;      // 用于获取节点的ip地址
-  	interface = address.Assign(Devices);
+  	Ipv4InterfaceContainer interface1;      // 用于获取节点的ip地址
+  	interface1 = address.Assign(Devices1);
+	address.SetBase("10.1.2.0","255.255.255.0");
+  	Ipv4InterfaceContainer interface2;      // 用于获取节点的ip地址
+  	interface2 = address.Assign(Devices2);
+	address.SetBase("10.1.3.0","255.255.255.0");
+  	Ipv4InterfaceContainer interface3;      // 用于获取节点的ip地址
+  	interface3 = address.Assign(Devices3);
+
+	UdpEchoServerHelper Server(PORT);
+	ApplicationContainer SApp = Server.Install(nodes1.Get(2));
+	SApp.Start(Seconds(1.0));
+	SApp.Stop(Seconds(TIME));
+	UdpEchoClientHelper Client(interface1.GetAddress(2),PORT);
+	Client.SetAttribute ("MaxPackets", UintegerValue (5000));
+  	Client.SetAttribute ("Interval", TimeValue (Seconds (0.01)));
+  	Client.SetAttribute ("PacketSize", UintegerValue (1024));
+	ApplicationContainer CApp = Client.Install(nodes3.Get(3));
+	CApp.Start(Seconds(1.0));
+	CApp.Stop(Seconds(TIME));
  
 	NS_LOG_INFO("Create Applications"); // 日志结点
 	// On,Off随机替换，OFF模式无流量，ON模式产生恒定速率流量
-	OnOffHelper onOff1("ns3::TcpSocketFactory",
-			    Address(InetSocketAddress(interface.GetAddress(0), PORT))); 
-	onOff1.SetAttribute("OnTime",
-			    StringValue("ns3::ConstantRandomVariable[Constant=1]")); // 在固定时间打开
-	onOff1.SetAttribute("OffTime", 
-			    StringValue("ns3::ConstantRandomVariable[Constant=0]")); // 关闭时间随机	
- 	ApplicationContainer apps1 = onOff1.Install(nodes);
-	apps1.Start(Seconds(1.0));
-	apps1.Stop(Seconds(TIME));
-	PacketSinkHelper sinkHelper("ns3::TcpSocketFactory",
-			   	    Address(InetSocketAddress(Ipv4Address::GetAny(), PORT)));
-	ApplicationContainer apps2 = sinkHelper.Install(nodes.Get(0));
-    	apps2.Start(Seconds(1.0));
-	apps2.Stop(Seconds(TIME));
+	// ontime = 1,offtime = 0表示一直发送
   	
 	// 启用互联网络路由 
   	Ipv4GlobalRoutingHelper::PopulateRoutingTables();
  
- 
+ 	FlowMonitorHelper flowmon;
+    	Ptr<FlowMonitor> monitor = flowmon.InstallAll();
  
   	Simulator::Stop(Seconds(TIME)); // 运行一段时间后自动关闭模拟器
 	// 开启trace记录
   	if(tracing==true) 
     	{
-      		phy.EnablePcap("AdhocWifiNet",Devices.Get(0));
+      		phy1.EnablePcap("AdhocWifiNet1",Devices1);
+      		phy2.EnablePcap("AdhocWifiNet2",Devices2);
+      		phy3.EnablePcap("AdhocWifiNet3",Devices3);
   		AnimationInterface anim("AdhocWifiNet.xml"); // 动画保存，用于后期复现
 		AsciiTraceHelper trace;
-		phy.EnableAsciiAll(trace.CreateFileStream("AdhocWifiNet.tr"));
+		phy1.EnableAsciiAll(trace.CreateFileStream("AdhocWifiNet1.tr"));
+		phy2.EnableAsciiAll(trace.CreateFileStream("AdhocWifiNet2.tr"));
+		phy3.EnableAsciiAll(trace.CreateFileStream("AdhocWifiNet3.tr"));
 		//包含两个方法调用。
 		//CreateFileStream()用未命名的对象在协议栈中创建了一个文件流,并把这个文件流传递给了调用方法,即创建了一个对象代表着一个名为“first.tr”的文件
 		//EnableAsciiAll()告诉helper你想要将ASCII tracing安装在仿真中的点到点设备上,并且你想要接收端以ASCII格式写出数据包移动信息。
@@ -170,6 +171,20 @@ int main(int argc,char* argv[])
  
      
 	Simulator::Run();
+	
+	monitor->CheckForLostPackets ();
+    
+    	Ptr<Ipv4FlowClassifier> classifier = DynamicCast<Ipv4FlowClassifier> (flowmon.GetClassifier ());
+    	std::map<FlowId, FlowMonitor::FlowStats> stats = monitor->GetFlowStats ();
+    	for (std::map<FlowId, FlowMonitor::FlowStats>::const_iterator i = stats.begin (); i != stats.end (); ++i)
+    	{
+        	Ipv4FlowClassifier::FiveTuple t = classifier->FindFlow (i->first);
+            	std::cout << "Flow " << i->first  << " (" << t.sourceAddress << " -> " << t.destinationAddress << ")\n";
+            	std::cout << "  Tx Bytes:   " << i->second.txBytes << "\n";
+            	std::cout << "  Rx Bytes:   " << i->second.rxBytes << "\n";
+            	std::cout << "  Throughput: " << (i->second.rxBytes+i->second.txBytes) * 8.0 / (i->second.timeLastRxPacket.GetSeconds() - i->second.timeFirstTxPacket.GetSeconds())/1024/1024  << " Mbps\n";
+        }
+	
  	Simulator::Destroy();
   	return 0;
 }

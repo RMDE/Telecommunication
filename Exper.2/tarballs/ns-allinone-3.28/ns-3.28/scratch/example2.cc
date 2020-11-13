@@ -15,7 +15,8 @@
 #include "ns3/ssid.h"
 
 #include "ns3/netanim-module.h"
-
+#define TIME 20.0
+#define PORT 8000
 
 
 using namespace ns3;
@@ -38,15 +39,15 @@ int main(int argc, char *argv[]) {
 
     // 激活日志组件
 
-    LogComponentEnable("AdHocNetwork", LOG_LEVEL_INFO);
+    LogComponentEnable("UdpEchoClientApplication", LOG_LEVEL_ALL);
 
-    LogComponentEnable("PacketSink", LOG_LEVEL_ALL);
+    LogComponentEnable("UdpEchoServerApplication", LOG_LEVEL_ALL);
 
 
 
     // ad hoc 设备数量
 
-    uint32_t nAdHoc = 7;
+    uint32_t number = 4;
 
 
 
@@ -54,7 +55,7 @@ int main(int argc, char *argv[]) {
 
     CommandLine cmd;
 
-    cmd.AddValue("nAdHoc", "Number of WiFi AD devices", nAdHoc);
+    cmd.AddValue("nAdHoc", "Number of WiFi AD devices", number);
 
     cmd.Parse(argc, argv);
 
@@ -62,194 +63,126 @@ int main(int argc, char *argv[]) {
 
     // 节点
 
-    NodeContainer adHocNodes;
-
-    adHocNodes.Create(nAdHoc);
+    NodeContainer nodes1;
+	nodes1.Create(number);
+	NodeContainer nodes2;
+	nodes2.Add(nodes1.Get(0));
+	nodes2.Create(number);
+	NodeContainer nodes3;
+	nodes3.Add(nodes2.Get(3));
+	nodes3.Create(number);
 
 
 
     // 创建信道和物理信息
 
-    YansWifiChannelHelper channel = YansWifiChannelHelper::Default();
-
-    YansWifiPhyHelper phy = YansWifiPhyHelper::Default();
-
-    phy.SetChannel(channel.Create());
+	YansWifiChannelHelper channel1 = YansWifiChannelHelper::Default(); 
+	YansWifiPhyHelper phy1 = YansWifiPhyHelper::Default(); 		
+	phy1.SetChannel (channel1.Create()); 				  
+	YansWifiChannelHelper channel2 = YansWifiChannelHelper::Default();
+	YansWifiPhyHelper phy2 = YansWifiPhyHelper::Default(); 		 
+	phy2.SetChannel (channel2.Create());
+	YansWifiChannelHelper channel3 = YansWifiChannelHelper::Default(); 
+	YansWifiPhyHelper phy3 = YansWifiPhyHelper::Default();
+	phy3.SetChannel (channel3.Create());
 
 
 
     // 创建 WiFi
 
-    WifiHelper wifi;
-
-    wifi.SetStandard(WIFI_PHY_STANDARD_80211a);
-
-    wifi.SetRemoteStationManager(
-
-        "ns3::ConstantRateWifiManager",
-
-        "DataMode",
-
-        StringValue("OfdmRate6Mbps")
-
-    );
+    WifiHelper wifi1; // 创建wifi助手,有助于创建WifiNetDevice对象
+  	wifi1.SetRemoteStationManager("ns3::ConstantRateWifiManager",
+				     "DataMode",StringValue("OfdmRate6Mbps"));
+  	WifiHelper wifi2; 
+  	wifi2.SetRemoteStationManager("ns3::ConstantRateWifiManager",
+				     "DataMode",StringValue("OfdmRate6Mbps"));
+  	WifiHelper wifi3; 
+  	wifi3.SetRemoteStationManager("ns3::ConstantRateWifiManager",
+				     "DataMode",StringValue("OfdmRate6Mbps"));
 
 
 
     // 设置 mac
 
     WifiMacHelper mac;
-
-    mac.SetType(
-
-        "ns3::AdhocWifiMac",
-
-        "Slot",
-
-        StringValue("1s")
-
-    );
-
-
-
-    // 创建设备
-
-    NetDeviceContainer adHocDevices;
-
-    adHocDevices = wifi.Install(phy, mac, adHocNodes);
+  	mac.SetType("ns3::AdhocWifiMac", 	 // 设置类型
+                    "Slot",StringValue("1s"));   // 插槽值 
+  	NetDeviceContainer Devices1,Devices2,Devices3; 
+  	Devices1 = wifi1.Install(phy1,mac,nodes1);	 // 设置节点网卡
+  	Devices2 = wifi2.Install(phy2,mac,nodes2);	 
+  	Devices3 = wifi3.Install(phy3,mac,nodes3);
 
 
 
     // 位置信息
 
-    MobilityHelper mobility;
-
-    mobility.SetPositionAllocator(
-
-        "ns3::GridPositionAllocator",
-
-        "MinX", DoubleValue(0.0),
-
-        "MinY", DoubleValue(0.0),
-
-        "DeltaX", DoubleValue(10.0),
-
-        "DeltaY", DoubleValue(10.0),
-
-        "GridWidth", UintegerValue(4),
-
-        "LayoutType", StringValue("RowFirst")
-
-    );
-
-    mobility.SetMobilityModel(
-
-        "ns3::RandomWalk2dMobilityModel",
-
-        "Bounds",
-
-        RectangleValue(
-
-            Rectangle(-50, 50, -50,50)
-
-        )
-
-    );
-
-    mobility.Install(adHocNodes);
+    MobilityHelper mobility; 
+  	// 设置位置分配器，用于分配初始化的每个节点的初始位置。
+ 	mobility.SetPositionAllocator("ns3::GridPositionAllocator",          
+            			      "MinX",DoubleValue(0.0),             
+       				      "MinY",DoubleValue(0.0),              
+		               	      "DeltaX",DoubleValue(15.0),        
+              			      "DeltaY",DoubleValue(15.0),       
+             			      "GridWidth",UintegerValue(5),         
+         			      "LayoutType",StringValue("RowFirst"));
+ 	mobility.SetMobilityModel("ns3::ConstantPositionMobilityModel"); 
+  	mobility.Install(nodes1); 
+  	mobility.Install(nodes2); 
+  	mobility.Install(nodes3);
 
 
 
     // 安装 internet 协议栈
 
-    InternetStackHelper internet;
-
-    internet.Install(adHocNodes);
+    InternetStackHelper stack; 
+ 	stack.Install(nodes1.Get(1));
+ 	stack.Install(nodes1.Get(2));
+ 	stack.Install(nodes1.Get(3));
+ 	stack.Install(nodes2);
+ 	stack.Install(nodes3.Get(1));
+ 	stack.Install(nodes3.Get(2));
+ 	stack.Install(nodes3.Get(3));
+ 	stack.Install(nodes3.Get(4));
 
 
 
     // 设置 ip 地址
 
     Ipv4AddressHelper address;
-
-    address.SetBase("10.1.1.0", "255.255.255.0");
-
-    Ipv4InterfaceContainer interface;
-
-    interface = address.Assign(adHocDevices);
+	address.SetBase("10.1.1.0","255.255.255.0");
+  	Ipv4InterfaceContainer interface1;      // 用于获取节点的ip地址
+  	interface1 = address.Assign(Devices1);
+	address.SetBase("10.1.2.0","255.255.255.0");
+  	Ipv4InterfaceContainer interface2;      // 用于获取节点的ip地址
+  	interface2 = address.Assign(Devices2);
+	address.SetBase("10.1.3.0","255.255.255.0");
+  	Ipv4InterfaceContainer interface3;      // 用于获取节点的ip地址
+  	interface3 = address.Assign(Devices3);
 
 
 
     // 应用层
 
-    NS_LOG_INFO("Create Applications");
-
-    uint16_t port = 8888;
-
-    OnOffHelper onOff1(
-
-        "ns3::TcpSocketFactory",
-
-        Address(InetSocketAddress(interface.GetAddress(0), port))
-
-    );
-
-    onOff1.SetAttribute("OnTime", StringValue("ns3::ConstantRandomVariable[Constant=1]"));
-
-    onOff1.SetAttribute("OffTime", StringValue("ns3::ConstantRandomVariable[Constant=0]"));
-
-
-
-    ApplicationContainer apps1 = onOff1.Install(adHocNodes);
-
-    apps1.Start(Seconds(1.0));
-
-    apps1.Stop(Seconds(15.0));
-
-
-
-    PacketSinkHelper sinkHelper(
-
-        "ns3::TcpSocketFactory",
-
-        Address(InetSocketAddress(Ipv4Address::GetAny(), port))
-
-    );
-
-    ApplicationContainer apps2 = sinkHelper.Install(adHocNodes.Get(0));
-
-
-
-    apps2.Start(Seconds(1.0));
-
-    apps2.Stop(Seconds(15.0));
-
-
+    UdpEchoServerHelper Server(PORT);
+	ApplicationContainer SApp = Server.Install(nodes1.Get(2));
+	SApp.Start(Seconds(1.0));
+	SApp.Stop(Seconds(TIME));
+	UdpEchoClientHelper Client(interface1.GetAddress(2),PORT);
+	Client.SetAttribute ("MaxPackets", UintegerValue (100));
+  	Client.SetAttribute ("Interval", TimeValue (Seconds (1.0)));
+  	Client.SetAttribute ("PacketSize", UintegerValue (1024));
+	ApplicationContainer CApp = Client.Install(nodes3.Get(3));
+	CApp.Start(Seconds(1.0));
+	CApp.Stop(Seconds(TIME));
 
     // 全局路由表
 
     Ipv4GlobalRoutingHelper::PopulateRoutingTables();
 
 
-
-    // trace
-
-    AsciiTraceHelper ascii;
-
-    phy.EnableAsciiAll(ascii.CreateFileStream("hoc.tr"));
-
-
-
     // 先停止模拟器
 
     Simulator::Stop(Seconds(15.0));
-
-
-
-    // pcap
-
-    phy.EnablePcap("hoc", adHocDevices.Get(0));
-
 
 
     // NetAnim

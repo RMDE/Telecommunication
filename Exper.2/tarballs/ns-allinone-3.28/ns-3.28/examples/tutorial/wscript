@@ -9,7 +9,7 @@ def build(bld):
 
     bld.register_ns3_script('first.py', ['internet', 'point-to-point', 'applications'])
         
-    obj = bld.create_ns3_program('second', ['core', 'point-to-point', 'csma', 'internet', 'applications'])
+    obj = bld.create_ns3_program('second', ['core', 'point-to-point', 'csma', 'internet', 'applications', 'netanim'])
     obj.source = 'second.cc'
         
     bld.register_ns3_script('second.py', ['core', 'point-to-point', 'csma', 'internet', 'applications'])

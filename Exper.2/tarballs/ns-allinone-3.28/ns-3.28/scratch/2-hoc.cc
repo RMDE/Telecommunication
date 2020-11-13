@@ -1,184 +1,143 @@
-/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
-/*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 2 as
- * published by the Free Software Foundation;
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-//161520211 贺星宇
-
+/*****************************************************************************
+** Author : Ye Xi
+** ID     : 161720110
+** Class  : 1617204
+** Github : https://github.com/Telecommunication/Exper.2/adhoc.cc 
+*****************************************************************************/
+#include "ns3/internet-stack-helper.h"
 #include "ns3/core-module.h"
 #include "ns3/point-to-point-module.h"
 #include "ns3/network-module.h"
 #include "ns3/applications-module.h"
+#include "ns3/wifi-module.h"
 #include "ns3/mobility-module.h"
 #include "ns3/csma-module.h"
 #include "ns3/internet-module.h"
+#include "ns3/netanim-module.h"
 #include "ns3/yans-wifi-helper.h"
 #include "ns3/ssid.h"
-#include "ns3/wifi-module.h"
-#include "ns3/netanim-module.h"
-#include "ns3/flow-monitor-module.h"
-
+#include <iostream>
+#define TIME 20.0
+#define PORT 8000
+using namespace std;
 using namespace ns3;
-NS_LOG_COMPONENT_DEFINE("AdHocNetwork");
 
-int main (int argc, char *argv[])
+// 日志设定
+NS_LOG_COMPONENT_DEFINE ("AdhocWirelessNetwork"); // 使用NS_LOG定义一个日志模块
+
+int main(int argc,char* argv[])
 {
-    //启用日志显示
-    LogComponentEnable ("AdHocNetwork", LOG_LEVEL_INFO);
-    LogComponentEnable ("PacketSink", LOG_LEVEL_ALL);
-    
-    
-    
-    //无线站点数量
-    uint32_t nWifi = 6;
-    
-    
-    CommandLine cmd;
-    cmd.Parse (argc,argv);
-    
-    
-//    //生成sta节点
-//    NodeContainer wifiStaNodes;
-//    wifiStaNodes.Create (nWifi);
-    
-    //生成AP节点
-    NodeContainer wifiApNodes;
-    wifiApNodes.Create(nWifi);
-    
+	Time::SetResolution(Time::NS); // 设置时间分辨率	
 
-    //建立移动模型，让sta和ap都固定
-    MobilityHelper mobility;
-
+	unsigned int number = 7; // STA节点数量
+	// 命令行参数设置 用法：./waf --run "scratch/star --n=5"
+	CommandLine cmd;
+	// 设定star节点数
+	cmd.AddValue("n","Number of star devices",number);
+	while(number<6 || number>15)
+	{
+		cout<<"Error:The number of the star devices should between 5 and 15"<<endl;
+		cout<<"Please enter the number again:";
+		cin>>number;
+	}
+	// 设置 trace
+	bool tracing = true;
+	cmd.AddValue("t","Wether turn on pcap tracing",tracing);
+	cmd.Parse(argc,argv);
+	
+	// 启用日志
+	LogComponentEnable("AdhocWirelessNetwork",LOG_LEVEL_ALL);
+	LogComponentEnable("PacketSink",LOG_LEVEL_ALL); // 使日志组件生效
+	// LOG_ERROR -- 记录错误信息
+	// LOG_WARN -- 记录警告信息
+	// LOG_DEBUG -- 记录调试信息
+	// LOG_INFO -- 记录程序相关信息
+	// LOG_FUNCTION -- 记录函数调用信息
+	// LOG_LOGIC -- 对于整体逻辑的描述
+	// LOG_ALL -- 包含上述所有信息
+	
+	// 创建节点
+	NodeContainer nodes;
+	nodes.Create(number);
+	
+	// 配置通信信道和物理层信息
+	YansWifiChannelHelper channel = YansWifiChannelHelper::Default(); // 设置默认通道
+	YansWifiPhyHelper phy = YansWifiPhyHelper::Default(); 		  // 配置phy助手
+	phy.SetChannel (channel.Create()); 				  // 使每一个phy与Channel相关联
  
-    //对ap进行设置
-    mobility.SetPositionAllocator ("ns3::GridPositionAllocator",
-                                   "MinX", DoubleValue (5.0),
-                                   "MinY", DoubleValue (5.0),
-                                   "DeltaX", DoubleValue (5.0),
-                                   "DeltaY", DoubleValue (10.0),
-                                   "GridWidth", UintegerValue (3),
-                                   "LayoutType", StringValue ("RowFirst"));
-    mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
-    mobility.Install (wifiApNodes);
-    
+	// 远程基站管理 使用AARF速率控制算法
+  	WifiHelper wifi; // 创建wifi助手,有助于创建WifiNetDevice对象
+  	wifi.SetRemoteStationManager("ns3::ConstantRateWifiManager",
+				     "DataMode",StringValue("OfdmRate6Mbps"));
+        // 设置wifi助手对象的速率控制算法类型：固定速率算法
+ 
+	// 配置MAC与网卡
+  	WifiMacHelper mac;
+  	mac.SetType("ns3::AdhocWifiMac", 	 // 设置类型
+                    "Slot",StringValue("1s"));   // 插槽值 
+  	NetDeviceContainer Devices; 
+  	Devices = wifi.Install(phy,mac,nodes);	 // 设置节点网卡
+  	
+	// 设置节点位置
+  	MobilityHelper mobility; 
+  	// 设置位置分配器，用于分配初始化的每个节点的初始位置。
+ 	mobility.SetPositionAllocator("ns3::GridPositionAllocator",           // 设置移动模型的类型(在矩形2d网格上分配位置)
+            			       "MinX",DoubleValue(0.0),               // 网格开始的x坐标
+       				       "MinY",DoubleValue(0.0),               // 网格开始的y坐标
+		               	       "DeltaX",DoubleValue(50.0),            // 对象之间的x间隔
+              			       "DeltaY",DoubleValue(50.0),           // 对象之间的y间隔
+             			       "GridWidth",UintegerValue(4),          // 在一行中排列的对象数
+         			       "LayoutType",StringValue("RowFirst")); // 布局类型（竖排）
+ 	mobility.SetMobilityModel("ns3::RandomWalk2dMobilityModel",            	       	   // 节点在随机方向上以随机速度围绕边界框移动
+             			   "Bounds",RectangleValue(Rectangle(-500,500,-500,500))); // 界限属性(矩形的范围)
+  	mobility.Install(nodes); 
+ 
+  	// 安装协议栈 
+  	InternetStackHelper stack; 
+ 	stack.Install(nodes);
+ 
+  	// 给设备接口分配IP地址 
+ 	Ipv4AddressHelper address;
+	address.SetBase("10.1.1.0","255.255.255.0");
+  	Ipv4InterfaceContainer interface;      // 用于获取节点的ip地址
+  	interface = address.Assign(Devices);
+ 
+	// 启用互联网络路由 
+  	Ipv4GlobalRoutingHelper::PopulateRoutingTables();
 
-    //使用点对点技术连接两个ap
-    PointToPointHelper pointToPoint;
-    pointToPoint.SetDeviceAttribute("DataRate", StringValue("5Mbps"));
-    pointToPoint.SetChannelAttribute("Delay", StringValue("2ms"));
-    
-    NetDeviceContainer devices;
-    NodeContainer node0 = NodeContainer(wifiApNodes.Get(1), wifiApNodes.Get(0));
-    NodeContainer node1 = NodeContainer(wifiApNodes.Get(2), wifiApNodes.Get(1));
-    NodeContainer node2 = NodeContainer(wifiApNodes.Get(3), wifiApNodes.Get(2));
-    NodeContainer node3 = NodeContainer(wifiApNodes.Get(4), wifiApNodes.Get(3));
-    NodeContainer node4 = NodeContainer(wifiApNodes.Get(5), wifiApNodes.Get(4));
-//    NodeContainer node5 = NodeContainer(wifiApNodes.Get(6), wifiApNodes.Get(5));
-    
-    //a为ap和sta安装协议栈
-    InternetStackHelper stack;
-    stack.Install (wifiApNodes);
-    //    stack.Install (wifiStaNodes);
-    
-    Ipv4AddressHelper address;
-    //    //地址分配
-    //    address.SetBase ("10.1.3.0", "255.255.255.0");
-    Ipv4InterfaceContainer interfaces;
-    //    interfaces = address.Assign(apDevices);
-    //    stainterfaces = address.Assign (staDevices);
-    //    address.Assign (apDevices);
-    //
-    
-    devices = pointToPoint.Install (node0);
-//    stack.Install (node0);
-    address.SetBase("10.12.1.0", "255.255.255.0");
-    interfaces = address.Assign(devices);
-    
-    devices = pointToPoint.Install (node1);
- //   stack.Install (node1);
-    address.SetBase("10.12.1.1", "255.255.255.0");
-    address.Assign(devices);
-    
-    devices = pointToPoint.Install (node2);
- //   stack.Install (node2);
-    address.SetBase("10.12.2.0", "255.255.255.0");
-    address.Assign(devices);
-    
-    devices = pointToPoint.Install (node3);
- //   stack.Install (node3);
-    address.SetBase("10.12.3.0", "255.255.255.0");
-    address.Assign(devices);
-    
-    devices = pointToPoint.Install (node4);
-  //  stack.Install (node4);
-    address.SetBase("10.12.3.0", "255.255.255.0");
-    address.Assign(devices);
-//    devices = pointToPoint.Install (node5);
-//    address.SetBase("10.12.6.0", "255.255.255.0");
-//    address.Assign(devices);
-    
-    //使用udp发送数据
-    UdpEchoServerHelper echoServer (9);
-
-    //将0号节点做为服务器端
-    ApplicationContainer serverApps = echoServer.Install (wifiApNodes.Get (0));
-    serverApps.Start (Seconds (1.0));
-    serverApps.Stop (Seconds (10.0));
-
-    UdpEchoClientHelper echoClient (interfaces.GetAddress (1), 9);
-    echoClient.SetAttribute ("MaxPackets", UintegerValue (10000));
-    echoClient.SetAttribute ("Interval", TimeValue (Seconds (0.00000001)));
-    echoClient.SetAttribute ("PacketSize", UintegerValue (1024));
-
-    ApplicationContainer clientApps = echoClient.Install (wifiApNodes.Get (nWifi - 1));
-    clientApps.Start (Seconds (6.0));
-    clientApps.Stop (Seconds (10.0));
-
-    Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
-    
-    //安装flowmon模块，用于计算吞吐量
-    FlowMonitorHelper flowmon;
-    Ptr<FlowMonitor> monitor = flowmon.InstallAll();
-    
-    Simulator::Stop (Seconds (10.0));
-    
-    //生成xml语句
-    AnimationInterface anim("mymulhoc.xml");
-    Simulator::Run ();
-
-    
-    
-    monitor->CheckForLostPackets ();
-    
-    Ptr<Ipv4FlowClassifier> classifier = DynamicCast<Ipv4FlowClassifier> (flowmon.GetClassifier ());
-    std::map<FlowId, FlowMonitor::FlowStats> stats = monitor->GetFlowStats ();
-    for (std::map<FlowId, FlowMonitor::FlowStats>::const_iterator i = stats.begin (); i != stats.end (); ++i)
-    {
-        Ipv4FlowClassifier::FiveTuple t = classifier->FindFlow (i->first);
-        if ((t.sourceAddress=="10.12.5.1" && t.destinationAddress == "10.12.1.2"))
-        {
-            std::cout << "Flow " << i->first  << " (" << t.sourceAddress << " -> " << t.destinationAddress << ")\n";
-            std::cout << "  Tx Bytes:   " << i->second.txBytes << "\n";
-            std::cout << "  Rx Bytes:   " << i->second.rxBytes << "\n";
-            std::cout << "  Throughput: " << i->second.rxBytes * 8.0 / (i->second.timeLastRxPacket.GetSeconds() - i->second.timeFirstTxPacket.GetSeconds())/1024/1024  << " Mbps\n";
-        }
-    }
-
-
-
-
-    Simulator::Destroy ();
-    
-   
-    return 0;
+	NS_LOG_INFO("Create Applications"); // 日志结点
+  	UdpEchoServerHelper Server(PORT);                            // 服务器
+        ApplicationContainer SApps = Server.Install(nodes.Get (0));     // 把该se
+        SApps.Start(Seconds(1.0));                                   // 服务端
+        SApps.Stop(Seconds(TIME));                                   // 服务端
+        UdpEchoClientHelper Client(interface.GetAddress(0),8000);       // 设置客户
+        Client.SetAttribute("MaxPackets",UintegerValue(5000));       // 应用程
+        Client.SetAttribute("Interval",TimeValue(Seconds(1.0)));     // 数据包
+        Client.SetAttribute("PacketSize",UintegerValue(1024));       // 出站数
+        ApplicationContainer CApps1 = Client.Install(nodes.Get(number-1));
+        CApps1.Start(Seconds(2.0));
+        CApps1.Stop(Seconds(TIME));
+        ApplicationContainer CApps2 = Client.Install(nodes.Get(1));
+	CApps2.Start(Seconds(2.0));
+        CApps2.Stop(Seconds(TIME));
+ 
+ 
+ 
+  	Simulator::Stop(Seconds(TIME)); // 运行一段时间后自动关闭模拟器
+	// 开启trace记录
+  	if(tracing==true) 
+    	{
+      		phy.EnablePcap("AdhocWifiNet",Devices);
+  		AnimationInterface anim("AdhocWifiNet.xml"); // 动画保存，用于后期复现
+		AsciiTraceHelper trace;
+		phy.EnableAsciiAll(trace.CreateFileStream("AdhocWifiNet.tr"));
+		//包含两个方法调用。
+		//CreateFileStream()用未命名的对象在协议栈中创建了一个文件流,并把这个文件流传递给了调用方法,即创建了一个对象代表着一个名为“first.tr”的文件
+		//EnableAsciiAll()告诉helper你想要将ASCII tracing安装在仿真中的点到点设备上,并且你想要接收端以ASCII格式写出数据包移动信息。
+    	}
+ 
+     
+	Simulator::Run();
+ 	Simulator::Destroy();
+  	return 0;
 }
