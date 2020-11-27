@@ -1,25 +1,69 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'packetsmode.h'
 **
-** Created by: The Qt Meta Object Compiler version 63 (Qt 4.8.7)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include "packetsmode.h"
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'packetsmode.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 63
-#error "This file was generated using the moc from 4.8.7. It"
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.5.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
+struct qt_meta_stringdata_netanim__PacketsMode_t {
+    QByteArrayData data[18];
+    char stringdata0[274];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_netanim__PacketsMode_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_netanim__PacketsMode_t qt_meta_stringdata_netanim__PacketsMode = {
+    {
+QT_MOC_LITERAL(0, 0, 20), // "netanim::PacketsMode"
+QT_MOC_LITERAL(1, 21, 8), // "testSlot"
+QT_MOC_LITERAL(2, 30, 0), // ""
+QT_MOC_LITERAL(3, 31, 10), // "zoomInSlot"
+QT_MOC_LITERAL(4, 42, 11), // "zoomOutSlot"
+QT_MOC_LITERAL(5, 54, 19), // "fromTimeChangedSlot"
+QT_MOC_LITERAL(6, 74, 12), // "fromTimeText"
+QT_MOC_LITERAL(7, 87, 17), // "toTimeChangedSlot"
+QT_MOC_LITERAL(8, 105, 10), // "toTimeText"
+QT_MOC_LITERAL(9, 116, 23), // "allowedNodesChangedSlot"
+QT_MOC_LITERAL(10, 140, 12), // "allowedNodes"
+QT_MOC_LITERAL(11, 153, 15), // "regexFilterSlot"
+QT_MOC_LITERAL(12, 169, 3), // "reg"
+QT_MOC_LITERAL(13, 173, 17), // "showGridLinesSlot"
+QT_MOC_LITERAL(14, 191, 19), // "showPacketTableSlot"
+QT_MOC_LITERAL(15, 211, 17), // "filterClickedSlot"
+QT_MOC_LITERAL(16, 229, 23), // "submitFilterClickedSlot"
+QT_MOC_LITERAL(17, 253, 20) // "showGraphClickedSlot"
+
+    },
+    "netanim::PacketsMode\0testSlot\0\0"
+    "zoomInSlot\0zoomOutSlot\0fromTimeChangedSlot\0"
+    "fromTimeText\0toTimeChangedSlot\0"
+    "toTimeText\0allowedNodesChangedSlot\0"
+    "allowedNodes\0regexFilterSlot\0reg\0"
+    "showGridLinesSlot\0showPacketTableSlot\0"
+    "filterClickedSlot\0submitFilterClickedSlot\0"
+    "showGraphClickedSlot"
+};
+#undef QT_MOC_LITERAL
+
 static const uint qt_meta_data_netanim__PacketsMode[] = {
 
  // content:
-       6,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
       12,   14, // methods
@@ -29,40 +73,42 @@ static const uint qt_meta_data_netanim__PacketsMode[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: signature, parameters, type, tag, flags
-      22,   21,   21,   21, 0x08,
-      33,   21,   21,   21, 0x08,
-      46,   21,   21,   21, 0x08,
-      73,   60,   21,   21, 0x08,
-     113,  102,   21,   21, 0x08,
-     153,  140,   21,   21, 0x08,
-     190,  186,   21,   21, 0x08,
-     215,   21,   21,   21, 0x08,
-     235,   21,   21,   21, 0x08,
-     257,   21,   21,   21, 0x08,
-     277,   21,   21,   21, 0x08,
-     303,   21,   21,   21, 0x08,
+ // slots: name, argc, parameters, tag, flags
+       1,    0,   74,    2, 0x08 /* Private */,
+       3,    0,   75,    2, 0x08 /* Private */,
+       4,    0,   76,    2, 0x08 /* Private */,
+       5,    1,   77,    2, 0x08 /* Private */,
+       7,    1,   80,    2, 0x08 /* Private */,
+       9,    1,   83,    2, 0x08 /* Private */,
+      11,    1,   86,    2, 0x08 /* Private */,
+      13,    0,   89,    2, 0x08 /* Private */,
+      14,    0,   90,    2, 0x08 /* Private */,
+      15,    0,   91,    2, 0x08 /* Private */,
+      16,    0,   92,    2, 0x08 /* Private */,
+      17,    0,   93,    2, 0x08 /* Private */,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    6,
+    QMetaType::Void, QMetaType::QString,    8,
+    QMetaType::Void, QMetaType::QString,   10,
+    QMetaType::Void, QMetaType::QString,   12,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
-};
-
-static const char qt_meta_stringdata_netanim__PacketsMode[] = {
-    "netanim::PacketsMode\0\0testSlot()\0"
-    "zoomInSlot()\0zoomOutSlot()\0fromTimeText\0"
-    "fromTimeChangedSlot(QString)\0toTimeText\0"
-    "toTimeChangedSlot(QString)\0allowedNodes\0"
-    "allowedNodesChangedSlot(QString)\0reg\0"
-    "regexFilterSlot(QString)\0showGridLinesSlot()\0"
-    "showPacketTableSlot()\0filterClickedSlot()\0"
-    "submitFilterClickedSlot()\0"
-    "showGraphClickedSlot()\0"
 };
 
 void netanim::PacketsMode::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        Q_ASSERT(staticMetaObject.cast(_o));
         PacketsMode *_t = static_cast<PacketsMode *>(_o);
+        Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->testSlot(); break;
         case 1: _t->zoomInSlot(); break;
@@ -81,28 +127,21 @@ void netanim::PacketsMode::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
     }
 }
 
-const QMetaObjectExtraData netanim::PacketsMode::staticMetaObjectExtraData = {
-    0,  qt_static_metacall 
-};
-
 const QMetaObject netanim::PacketsMode::staticMetaObject = {
-    { &Mode::staticMetaObject, qt_meta_stringdata_netanim__PacketsMode,
-      qt_meta_data_netanim__PacketsMode, &staticMetaObjectExtraData }
+    { &Mode::staticMetaObject, qt_meta_stringdata_netanim__PacketsMode.data,
+      qt_meta_data_netanim__PacketsMode,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
-#ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &netanim::PacketsMode::getStaticMetaObject() { return staticMetaObject; }
-#endif //Q_NO_DATA_RELOCATION
 
 const QMetaObject *netanim::PacketsMode::metaObject() const
 {
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
 void *netanim::PacketsMode::qt_metacast(const char *_clname)
 {
-    if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_netanim__PacketsMode))
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_netanim__PacketsMode.stringdata0))
         return static_cast<void*>(const_cast< PacketsMode*>(this));
     return Mode::qt_metacast(_clname);
 }
@@ -115,6 +154,10 @@ int netanim::PacketsMode::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
+        _id -= 12;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 12)
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 12;
     }
     return _id;

@@ -90,8 +90,8 @@ int main(int argc,char* argv[])
  	mobility.SetPositionAllocator("ns3::GridPositionAllocator",           // 设置移动模型的类型(在矩形2d网格上分配位置)
             			       "MinX",DoubleValue(0.0),               // 网格开始的x坐标
        				       "MinY",DoubleValue(0.0),               // 网格开始的y坐标
-		               	       "DeltaX",DoubleValue(15.0),            // 对象之间的x间隔
-              			       "DeltaY",DoubleValue(15.0),           // 对象之间的y间隔
+		               	       "DeltaX",DoubleValue(10.0),            // 对象之间的x间隔
+              			       "DeltaY",DoubleValue(10.0),           // 对象之间的y间隔
              			       "GridWidth",UintegerValue(3),          // 在一行中排列的对象数
          			       "LayoutType",StringValue("RowFirst")); // 布局类型（竖排）
  	mobility.SetMobilityModel("ns3::RandomWalk2dMobilityModel",            	       	   // 节点在随机方向上以随机速度围绕边界框移动
@@ -168,3 +168,4 @@ int main(int argc,char* argv[])
  	Simulator::Destroy();
   	return 0;
 }
+

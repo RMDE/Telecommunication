@@ -1,25 +1,93 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'animatormode.h'
 **
-** Created by: The Qt Meta Object Compiler version 63 (Qt 4.8.7)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include "animatormode.h"
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'animatormode.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 63
-#error "This file was generated using the moc from 4.8.7. It"
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.5.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
+struct qt_meta_stringdata_netanim__AnimatorMode_t {
+    QByteArrayData data[33];
+    char stringdata0[582];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_netanim__AnimatorMode_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_netanim__AnimatorMode_t qt_meta_stringdata_netanim__AnimatorMode = {
+    {
+QT_MOC_LITERAL(0, 0, 21), // "netanim::AnimatorMode"
+QT_MOC_LITERAL(1, 22, 8), // "testSlot"
+QT_MOC_LITERAL(2, 31, 0), // ""
+QT_MOC_LITERAL(3, 32, 22), // "clickTraceFileOpenSlot"
+QT_MOC_LITERAL(4, 55, 14), // "reloadFileSlot"
+QT_MOC_LITERAL(5, 70, 15), // "clickZoomInSlot"
+QT_MOC_LITERAL(6, 86, 16), // "clickZoomOutSlot"
+QT_MOC_LITERAL(7, 103, 14), // "clickResetSlot"
+QT_MOC_LITERAL(8, 118, 13), // "clickPlaySlot"
+QT_MOC_LITERAL(9, 132, 27), // "simulationSliderPressedSlot"
+QT_MOC_LITERAL(10, 160, 18), // "updateTimelineSlot"
+QT_MOC_LITERAL(11, 179, 5), // "value"
+QT_MOC_LITERAL(12, 185, 21), // "updateRateTimeoutSlot"
+QT_MOC_LITERAL(13, 207, 19), // "updateGridLinesSlot"
+QT_MOC_LITERAL(14, 227, 18), // "updateNodeSizeSlot"
+QT_MOC_LITERAL(15, 246, 20), // "updateUpdateRateSlot"
+QT_MOC_LITERAL(16, 267, 17), // "showGridLinesSlot"
+QT_MOC_LITERAL(17, 285, 14), // "showNodeIdSlot"
+QT_MOC_LITERAL(18, 300, 17), // "showNodeSysIdSlot"
+QT_MOC_LITERAL(19, 318, 12), // "showMetaSlot"
+QT_MOC_LITERAL(20, 331, 14), // "showPacketSlot"
+QT_MOC_LITERAL(21, 346, 23), // "showWirelessCirclesSlot"
+QT_MOC_LITERAL(22, 370, 19), // "showPacketStatsSlot"
+QT_MOC_LITERAL(23, 390, 25), // "showNodePositionStatsSlot"
+QT_MOC_LITERAL(24, 416, 10), // "showIpSlot"
+QT_MOC_LITERAL(25, 427, 11), // "showMacSlot"
+QT_MOC_LITERAL(26, 439, 17), // "showRoutePathSlot"
+QT_MOC_LITERAL(27, 457, 23), // "showBatteryCapacitySlot"
+QT_MOC_LITERAL(28, 481, 32), // "buttonAnimationGroupFinishedSlot"
+QT_MOC_LITERAL(29, 514, 18), // "showPropertiesSlot"
+QT_MOC_LITERAL(30, 533, 15), // "pauseAtTimeSlot"
+QT_MOC_LITERAL(31, 549, 8), // "stepSlot"
+QT_MOC_LITERAL(32, 558, 23) // "enableMousePositionSlot"
+
+    },
+    "netanim::AnimatorMode\0testSlot\0\0"
+    "clickTraceFileOpenSlot\0reloadFileSlot\0"
+    "clickZoomInSlot\0clickZoomOutSlot\0"
+    "clickResetSlot\0clickPlaySlot\0"
+    "simulationSliderPressedSlot\0"
+    "updateTimelineSlot\0value\0updateRateTimeoutSlot\0"
+    "updateGridLinesSlot\0updateNodeSizeSlot\0"
+    "updateUpdateRateSlot\0showGridLinesSlot\0"
+    "showNodeIdSlot\0showNodeSysIdSlot\0"
+    "showMetaSlot\0showPacketSlot\0"
+    "showWirelessCirclesSlot\0showPacketStatsSlot\0"
+    "showNodePositionStatsSlot\0showIpSlot\0"
+    "showMacSlot\0showRoutePathSlot\0"
+    "showBatteryCapacitySlot\0"
+    "buttonAnimationGroupFinishedSlot\0"
+    "showPropertiesSlot\0pauseAtTimeSlot\0"
+    "stepSlot\0enableMousePositionSlot"
+};
+#undef QT_MOC_LITERAL
+
 static const uint qt_meta_data_netanim__AnimatorMode[] = {
 
  // content:
-       6,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
       31,   14, // methods
@@ -29,69 +97,80 @@ static const uint qt_meta_data_netanim__AnimatorMode[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: signature, parameters, type, tag, flags
-      23,   22,   22,   22, 0x08,
-      34,   22,   22,   22, 0x08,
-      59,   22,   22,   22, 0x08,
-      76,   22,   22,   22, 0x08,
-      94,   22,   22,   22, 0x08,
-     113,   22,   22,   22, 0x08,
-     130,   22,   22,   22, 0x08,
-     146,   22,   22,   22, 0x08,
-     182,  176,   22,   22, 0x08,
-     206,   22,   22,   22, 0x08,
-     227,   22,   22,   22, 0x08,
-     251,  176,   22,   22, 0x08,
-     276,  176,   22,   22, 0x08,
-     304,   22,   22,   22, 0x08,
-     330,   22,   22,   22, 0x08,
-     350,   22,   22,   22, 0x08,
-     367,   22,   22,   22, 0x08,
-     387,   22,   22,   22, 0x08,
-     402,   22,   22,   22, 0x08,
-     419,   22,   22,   22, 0x08,
-     445,   22,   22,   22, 0x08,
-     467,   22,   22,   22, 0x08,
-     495,   22,   22,   22, 0x08,
-     508,   22,   22,   22, 0x08,
-     522,   22,   22,   22, 0x08,
-     542,   22,   22,   22, 0x08,
-     568,   22,   22,   22, 0x08,
-     603,   22,   22,   22, 0x08,
-     624,   22,   22,   22, 0x08,
-     642,   22,   22,   22, 0x08,
-     653,   22,   22,   22, 0x08,
+ // slots: name, argc, parameters, tag, flags
+       1,    0,  169,    2, 0x08 /* Private */,
+       3,    0,  170,    2, 0x08 /* Private */,
+       4,    0,  171,    2, 0x08 /* Private */,
+       5,    0,  172,    2, 0x08 /* Private */,
+       6,    0,  173,    2, 0x08 /* Private */,
+       7,    0,  174,    2, 0x08 /* Private */,
+       8,    0,  175,    2, 0x08 /* Private */,
+       9,    0,  176,    2, 0x08 /* Private */,
+      10,    1,  177,    2, 0x08 /* Private */,
+      10,    0,  180,    2, 0x08 /* Private */,
+      12,    0,  181,    2, 0x08 /* Private */,
+      13,    1,  182,    2, 0x08 /* Private */,
+      14,    1,  185,    2, 0x08 /* Private */,
+      15,    1,  188,    2, 0x08 /* Private */,
+      16,    0,  191,    2, 0x08 /* Private */,
+      17,    0,  192,    2, 0x08 /* Private */,
+      18,    0,  193,    2, 0x08 /* Private */,
+      19,    0,  194,    2, 0x08 /* Private */,
+      20,    0,  195,    2, 0x08 /* Private */,
+      21,    0,  196,    2, 0x08 /* Private */,
+      22,    0,  197,    2, 0x08 /* Private */,
+      23,    0,  198,    2, 0x08 /* Private */,
+      24,    0,  199,    2, 0x08 /* Private */,
+      25,    0,  200,    2, 0x08 /* Private */,
+      26,    0,  201,    2, 0x08 /* Private */,
+      27,    0,  202,    2, 0x08 /* Private */,
+      28,    0,  203,    2, 0x08 /* Private */,
+      29,    0,  204,    2, 0x08 /* Private */,
+      30,    0,  205,    2, 0x08 /* Private */,
+      31,    0,  206,    2, 0x08 /* Private */,
+      32,    0,  207,    2, 0x08 /* Private */,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   11,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   11,
+    QMetaType::Void, QMetaType::QString,   11,
+    QMetaType::Void, QMetaType::Int,    2,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
-};
-
-static const char qt_meta_stringdata_netanim__AnimatorMode[] = {
-    "netanim::AnimatorMode\0\0testSlot()\0"
-    "clickTraceFileOpenSlot()\0reloadFileSlot()\0"
-    "clickZoomInSlot()\0clickZoomOutSlot()\0"
-    "clickResetSlot()\0clickPlaySlot()\0"
-    "simulationSliderPressedSlot()\0value\0"
-    "updateTimelineSlot(int)\0updateTimelineSlot()\0"
-    "updateRateTimeoutSlot()\0"
-    "updateGridLinesSlot(int)\0"
-    "updateNodeSizeSlot(QString)\0"
-    "updateUpdateRateSlot(int)\0showGridLinesSlot()\0"
-    "showNodeIdSlot()\0showNodeSysIdSlot()\0"
-    "showMetaSlot()\0showPacketSlot()\0"
-    "showWirelessCirclesSlot()\0"
-    "showPacketStatsSlot()\0showNodePositionStatsSlot()\0"
-    "showIpSlot()\0showMacSlot()\0"
-    "showRoutePathSlot()\0showBatteryCapacitySlot()\0"
-    "buttonAnimationGroupFinishedSlot()\0"
-    "showPropertiesSlot()\0pauseAtTimeSlot()\0"
-    "stepSlot()\0enableMousePositionSlot()\0"
 };
 
 void netanim::AnimatorMode::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        Q_ASSERT(staticMetaObject.cast(_o));
         AnimatorMode *_t = static_cast<AnimatorMode *>(_o);
+        Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->testSlot(); break;
         case 1: _t->clickTraceFileOpenSlot(); break;
@@ -129,28 +208,21 @@ void netanim::AnimatorMode::qt_static_metacall(QObject *_o, QMetaObject::Call _c
     }
 }
 
-const QMetaObjectExtraData netanim::AnimatorMode::staticMetaObjectExtraData = {
-    0,  qt_static_metacall 
-};
-
 const QMetaObject netanim::AnimatorMode::staticMetaObject = {
-    { &Mode::staticMetaObject, qt_meta_stringdata_netanim__AnimatorMode,
-      qt_meta_data_netanim__AnimatorMode, &staticMetaObjectExtraData }
+    { &Mode::staticMetaObject, qt_meta_stringdata_netanim__AnimatorMode.data,
+      qt_meta_data_netanim__AnimatorMode,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
-#ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &netanim::AnimatorMode::getStaticMetaObject() { return staticMetaObject; }
-#endif //Q_NO_DATA_RELOCATION
 
 const QMetaObject *netanim::AnimatorMode::metaObject() const
 {
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
 void *netanim::AnimatorMode::qt_metacast(const char *_clname)
 {
-    if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_netanim__AnimatorMode))
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_netanim__AnimatorMode.stringdata0))
         return static_cast<void*>(const_cast< AnimatorMode*>(this));
     return Mode::qt_metacast(_clname);
 }
@@ -163,6 +235,10 @@ int netanim::AnimatorMode::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         if (_id < 31)
             qt_static_metacall(this, _c, _id, _a);
+        _id -= 31;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 31)
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 31;
     }
     return _id;

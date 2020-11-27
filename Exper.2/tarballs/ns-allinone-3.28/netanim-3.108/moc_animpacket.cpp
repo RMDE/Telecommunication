@@ -1,25 +1,46 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'animpacket.h'
 **
-** Created by: The Qt Meta Object Compiler version 63 (Qt 4.8.7)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include "animpacket.h"
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'animpacket.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 63
-#error "This file was generated using the moc from 4.8.7. It"
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.5.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
+struct qt_meta_stringdata_netanim__AnimWirelessCircles_t {
+    QByteArrayData data[2];
+    char stringdata0[34];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_netanim__AnimWirelessCircles_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_netanim__AnimWirelessCircles_t qt_meta_stringdata_netanim__AnimWirelessCircles = {
+    {
+QT_MOC_LITERAL(0, 0, 28), // "netanim::AnimWirelessCircles"
+QT_MOC_LITERAL(1, 29, 4) // "rect"
+
+    },
+    "netanim::AnimWirelessCircles\0rect"
+};
+#undef QT_MOC_LITERAL
+
 static const uint qt_meta_data_netanim__AnimWirelessCircles[] = {
 
  // content:
-       6,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -30,46 +51,55 @@ static const uint qt_meta_data_netanim__AnimWirelessCircles[] = {
        0,       // signalCount
 
  // properties: name, type, flags
-      36,   29, 0x14095103,
+       1, QMetaType::QRectF, 0x00095103,
 
        0        // eod
 };
 
-static const char qt_meta_stringdata_netanim__AnimWirelessCircles[] = {
-    "netanim::AnimWirelessCircles\0QRectF\0"
-    "rect\0"
-};
-
 void netanim::AnimWirelessCircles::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
+
+#ifndef QT_NO_PROPERTIES
+    if (_c == QMetaObject::ReadProperty) {
+        AnimWirelessCircles *_t = static_cast<AnimWirelessCircles *>(_o);
+        Q_UNUSED(_t)
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: *reinterpret_cast< QRectF*>(_v) = _t->rect(); break;
+        default: break;
+        }
+    } else if (_c == QMetaObject::WriteProperty) {
+        AnimWirelessCircles *_t = static_cast<AnimWirelessCircles *>(_o);
+        Q_UNUSED(_t)
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: _t->setRect(*reinterpret_cast< QRectF*>(_v)); break;
+        default: break;
+        }
+    } else if (_c == QMetaObject::ResetProperty) {
+    }
+#endif // QT_NO_PROPERTIES
     Q_UNUSED(_o);
     Q_UNUSED(_id);
     Q_UNUSED(_c);
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData netanim::AnimWirelessCircles::staticMetaObjectExtraData = {
-    0,  qt_static_metacall 
-};
-
 const QMetaObject netanim::AnimWirelessCircles::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_netanim__AnimWirelessCircles,
-      qt_meta_data_netanim__AnimWirelessCircles, &staticMetaObjectExtraData }
+    { &QObject::staticMetaObject, qt_meta_stringdata_netanim__AnimWirelessCircles.data,
+      qt_meta_data_netanim__AnimWirelessCircles,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
-#ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &netanim::AnimWirelessCircles::getStaticMetaObject() { return staticMetaObject; }
-#endif //Q_NO_DATA_RELOCATION
 
 const QMetaObject *netanim::AnimWirelessCircles::metaObject() const
 {
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
 void *netanim::AnimWirelessCircles::qt_metacast(const char *_clname)
 {
-    if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_netanim__AnimWirelessCircles))
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_netanim__AnimWirelessCircles.stringdata0))
         return static_cast<void*>(const_cast< AnimWirelessCircles*>(this));
     if (!strcmp(_clname, "QGraphicsEllipseItem"))
         return static_cast< QGraphicsEllipseItem*>(const_cast< AnimWirelessCircles*>(this));
@@ -83,19 +113,9 @@ int netanim::AnimWirelessCircles::qt_metacall(QMetaObject::Call _c, int _id, voi
         return _id;
     
 #ifndef QT_NO_PROPERTIES
-     if (_c == QMetaObject::ReadProperty) {
-        void *_v = _a[0];
-        switch (_id) {
-        case 0: *reinterpret_cast< QRectF*>(_v) = rect(); break;
-        }
-        _id -= 1;
-    } else if (_c == QMetaObject::WriteProperty) {
-        void *_v = _a[0];
-        switch (_id) {
-        case 0: setRect(*reinterpret_cast< QRectF*>(_v)); break;
-        }
-        _id -= 1;
-    } else if (_c == QMetaObject::ResetProperty) {
+   if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
+            || _c == QMetaObject::ResetProperty || _c == QMetaObject::RegisterPropertyMetaType) {
+        qt_static_metacall(this, _c, _id, _a);
         _id -= 1;
     } else if (_c == QMetaObject::QueryPropertyDesignable) {
         _id -= 1;
@@ -111,10 +131,29 @@ int netanim::AnimWirelessCircles::qt_metacall(QMetaObject::Call _c, int _id, voi
 #endif // QT_NO_PROPERTIES
     return _id;
 }
+struct qt_meta_stringdata_netanim__AnimPacket_t {
+    QByteArrayData data[2];
+    char stringdata0[24];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_netanim__AnimPacket_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_netanim__AnimPacket_t qt_meta_stringdata_netanim__AnimPacket = {
+    {
+QT_MOC_LITERAL(0, 0, 19), // "netanim::AnimPacket"
+QT_MOC_LITERAL(1, 20, 3) // "pos"
+
+    },
+    "netanim::AnimPacket\0pos"
+};
+#undef QT_MOC_LITERAL
+
 static const uint qt_meta_data_netanim__AnimPacket[] = {
 
  // content:
-       6,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -125,45 +164,55 @@ static const uint qt_meta_data_netanim__AnimPacket[] = {
        0,       // signalCount
 
  // properties: name, type, flags
-      28,   20, 0x1a095103,
+       1, QMetaType::QPointF, 0x00095103,
 
        0        // eod
 };
 
-static const char qt_meta_stringdata_netanim__AnimPacket[] = {
-    "netanim::AnimPacket\0QPointF\0pos\0"
-};
-
 void netanim::AnimPacket::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
+
+#ifndef QT_NO_PROPERTIES
+    if (_c == QMetaObject::ReadProperty) {
+        AnimPacket *_t = static_cast<AnimPacket *>(_o);
+        Q_UNUSED(_t)
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: *reinterpret_cast< QPointF*>(_v) = _t->pos(); break;
+        default: break;
+        }
+    } else if (_c == QMetaObject::WriteProperty) {
+        AnimPacket *_t = static_cast<AnimPacket *>(_o);
+        Q_UNUSED(_t)
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: _t->setPos(*reinterpret_cast< QPointF*>(_v)); break;
+        default: break;
+        }
+    } else if (_c == QMetaObject::ResetProperty) {
+    }
+#endif // QT_NO_PROPERTIES
     Q_UNUSED(_o);
     Q_UNUSED(_id);
     Q_UNUSED(_c);
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData netanim::AnimPacket::staticMetaObjectExtraData = {
-    0,  qt_static_metacall 
-};
-
 const QMetaObject netanim::AnimPacket::staticMetaObject = {
-    { &QGraphicsObject::staticMetaObject, qt_meta_stringdata_netanim__AnimPacket,
-      qt_meta_data_netanim__AnimPacket, &staticMetaObjectExtraData }
+    { &QGraphicsObject::staticMetaObject, qt_meta_stringdata_netanim__AnimPacket.data,
+      qt_meta_data_netanim__AnimPacket,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
-#ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &netanim::AnimPacket::getStaticMetaObject() { return staticMetaObject; }
-#endif //Q_NO_DATA_RELOCATION
 
 const QMetaObject *netanim::AnimPacket::metaObject() const
 {
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
 void *netanim::AnimPacket::qt_metacast(const char *_clname)
 {
-    if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_netanim__AnimPacket))
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_netanim__AnimPacket.stringdata0))
         return static_cast<void*>(const_cast< AnimPacket*>(this));
     return QGraphicsObject::qt_metacast(_clname);
 }
@@ -175,19 +224,9 @@ int netanim::AnimPacket::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     
 #ifndef QT_NO_PROPERTIES
-     if (_c == QMetaObject::ReadProperty) {
-        void *_v = _a[0];
-        switch (_id) {
-        case 0: *reinterpret_cast< QPointF*>(_v) = pos(); break;
-        }
-        _id -= 1;
-    } else if (_c == QMetaObject::WriteProperty) {
-        void *_v = _a[0];
-        switch (_id) {
-        case 0: setPos(*reinterpret_cast< QPointF*>(_v)); break;
-        }
-        _id -= 1;
-    } else if (_c == QMetaObject::ResetProperty) {
+   if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
+            || _c == QMetaObject::ResetProperty || _c == QMetaObject::RegisterPropertyMetaType) {
+        qt_static_metacall(this, _c, _id, _a);
         _id -= 1;
     } else if (_c == QMetaObject::QueryPropertyDesignable) {
         _id -= 1;

@@ -1,0 +1,2 @@
+set object 1 rect from 886.814,842.376 to 986.814,862.376 front fs empty 
+set object 2 rect from 886.814,872.376 to 986.814,892.376 front fs empty 

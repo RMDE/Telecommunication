@@ -1,25 +1,80 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qtvariantproperty.h'
 **
-** Created by: The Qt Meta Object Compiler version 63 (Qt 4.8.7)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include "qtpropertybrowser/src/qtvariantproperty.h"
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'qtvariantproperty.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 63
-#error "This file was generated using the moc from 4.8.7. It"
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.5.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
+struct qt_meta_stringdata_QtVariantPropertyManager_t {
+    QByteArrayData data[26];
+    char stringdata0[418];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_QtVariantPropertyManager_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_QtVariantPropertyManager_t qt_meta_stringdata_QtVariantPropertyManager = {
+    {
+QT_MOC_LITERAL(0, 0, 24), // "QtVariantPropertyManager"
+QT_MOC_LITERAL(1, 25, 12), // "valueChanged"
+QT_MOC_LITERAL(2, 38, 0), // ""
+QT_MOC_LITERAL(3, 39, 11), // "QtProperty*"
+QT_MOC_LITERAL(4, 51, 8), // "property"
+QT_MOC_LITERAL(5, 60, 3), // "val"
+QT_MOC_LITERAL(6, 64, 16), // "attributeChanged"
+QT_MOC_LITERAL(7, 81, 9), // "attribute"
+QT_MOC_LITERAL(8, 91, 8), // "setValue"
+QT_MOC_LITERAL(9, 100, 12), // "setAttribute"
+QT_MOC_LITERAL(10, 113, 5), // "value"
+QT_MOC_LITERAL(11, 119, 16), // "slotValueChanged"
+QT_MOC_LITERAL(12, 136, 16), // "slotRangeChanged"
+QT_MOC_LITERAL(13, 153, 21), // "slotSingleStepChanged"
+QT_MOC_LITERAL(14, 175, 19), // "slotDecimalsChanged"
+QT_MOC_LITERAL(15, 195, 17), // "slotRegExpChanged"
+QT_MOC_LITERAL(16, 213, 19), // "slotEchoModeChanged"
+QT_MOC_LITERAL(17, 233, 21), // "slotConstraintChanged"
+QT_MOC_LITERAL(18, 255, 20), // "slotEnumNamesChanged"
+QT_MOC_LITERAL(19, 276, 20), // "slotEnumIconsChanged"
+QT_MOC_LITERAL(20, 297, 15), // "QMap<int,QIcon>"
+QT_MOC_LITERAL(21, 313, 20), // "slotFlagNamesChanged"
+QT_MOC_LITERAL(22, 334, 19), // "slotReadOnlyChanged"
+QT_MOC_LITERAL(23, 354, 22), // "slotTextVisibleChanged"
+QT_MOC_LITERAL(24, 377, 20), // "slotPropertyInserted"
+QT_MOC_LITERAL(25, 398, 19) // "slotPropertyRemoved"
+
+    },
+    "QtVariantPropertyManager\0valueChanged\0"
+    "\0QtProperty*\0property\0val\0attributeChanged\0"
+    "attribute\0setValue\0setAttribute\0value\0"
+    "slotValueChanged\0slotRangeChanged\0"
+    "slotSingleStepChanged\0slotDecimalsChanged\0"
+    "slotRegExpChanged\0slotEchoModeChanged\0"
+    "slotConstraintChanged\0slotEnumNamesChanged\0"
+    "slotEnumIconsChanged\0QMap<int,QIcon>\0"
+    "slotFlagNamesChanged\0slotReadOnlyChanged\0"
+    "slotTextVisibleChanged\0slotPropertyInserted\0"
+    "slotPropertyRemoved"
+};
+#undef QT_MOC_LITERAL
+
 static const uint qt_meta_data_QtVariantPropertyManager[] = {
 
  // content:
-       6,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
       43,   14, // methods
@@ -29,110 +84,108 @@ static const uint qt_meta_data_QtVariantPropertyManager[] = {
        0,       // flags
        2,       // signalCount
 
- // signals: signature, parameters, type, tag, flags
-      39,   26,   25,   25, 0x05,
-      97,   74,   25,   25, 0x05,
+ // signals: name, argc, parameters, tag, flags
+       1,    2,  229,    2, 0x06 /* Public */,
+       6,    3,  234,    2, 0x06 /* Public */,
 
- // slots: signature, parameters, type, tag, flags
-     144,   26,   25,   25, 0x0a,
-     200,  175,   25,   25, 0x0a,
-     245,  243,   25,   25, 0x08,
-     282,  279,   25,   25, 0x08,
-     320,  243,   25,   25, 0x08,
-     359,  243,   25,   25, 0x08,
-     396,  279,   25,   25, 0x08,
-     440,  243,   25,   25, 0x08,
-     482,  243,   25,   25, 0x08,
-     519,  243,   25,   25, 0x08,
-     554,  243,   25,   25, 0x08,
-     592,  243,   25,   25, 0x08,
-     631,  243,   25,   25, 0x08,
-     668,  243,   25,   25, 0x08,
-     704,  279,   25,   25, 0x08,
-     746,  243,   25,   25, 0x08,
-     782,  243,   25,   25, 0x08,
-     822,  243,   25,   25, 0x08,
-     865,  243,   25,   25, 0x08,
-     901,  243,   25,   25, 0x08,
-     939,  243,   25,   25, 0x08,
-     976,  243,   25,   25, 0x08,
-    1014,  243,   25,   25, 0x08,
-    1050,  279,   25,   25, 0x08,
-    1092,  243,   25,   25, 0x08,
-    1129,  279,   25,   25, 0x08,
-    1173,  243,   25,   25, 0x08,
-    1209,  243,   25,   25, 0x08,
-    1250,  243,   25,   25, 0x08,
-    1287,  243,   25,   25, 0x08,
-    1329,  243,   25,   25, 0x08,
-    1366,  243,   25,   25, 0x08,
-    1412,  243,   25,   25, 0x08,
-    1462,  243,   25,   25, 0x08,
-    1504,  243,   25,   25, 0x08,
-    1540,  243,   25,   25, 0x08,
-    1578,  243,   25,   25, 0x08,
-    1624,  243,   25,   25, 0x08,
-    1662,  243,   25,   25, 0x08,
-    1703,  279,   25,   25, 0x08,
-    1761,  243,   25,   25, 0x08,
+ // slots: name, argc, parameters, tag, flags
+       8,    2,  241,    2, 0x0a /* Public */,
+       9,    3,  246,    2, 0x0a /* Public */,
+      11,    2,  253,    2, 0x08 /* Private */,
+      12,    3,  258,    2, 0x08 /* Private */,
+      13,    2,  265,    2, 0x08 /* Private */,
+      11,    2,  270,    2, 0x08 /* Private */,
+      12,    3,  275,    2, 0x08 /* Private */,
+      13,    2,  282,    2, 0x08 /* Private */,
+      14,    2,  287,    2, 0x08 /* Private */,
+      11,    2,  292,    2, 0x08 /* Private */,
+      11,    2,  297,    2, 0x08 /* Private */,
+      15,    2,  302,    2, 0x08 /* Private */,
+      16,    2,  307,    2, 0x08 /* Private */,
+      11,    2,  312,    2, 0x08 /* Private */,
+      12,    3,  317,    2, 0x08 /* Private */,
+      11,    2,  324,    2, 0x08 /* Private */,
+      11,    2,  329,    2, 0x08 /* Private */,
+      11,    2,  334,    2, 0x08 /* Private */,
+      11,    2,  339,    2, 0x08 /* Private */,
+      11,    2,  344,    2, 0x08 /* Private */,
+      11,    2,  349,    2, 0x08 /* Private */,
+      11,    2,  354,    2, 0x08 /* Private */,
+      11,    2,  359,    2, 0x08 /* Private */,
+      12,    3,  364,    2, 0x08 /* Private */,
+      11,    2,  371,    2, 0x08 /* Private */,
+      12,    3,  376,    2, 0x08 /* Private */,
+      11,    2,  383,    2, 0x08 /* Private */,
+      17,    2,  388,    2, 0x08 /* Private */,
+      11,    2,  393,    2, 0x08 /* Private */,
+      17,    2,  398,    2, 0x08 /* Private */,
+      11,    2,  403,    2, 0x08 /* Private */,
+      18,    2,  408,    2, 0x08 /* Private */,
+      19,    2,  413,    2, 0x08 /* Private */,
+      11,    2,  418,    2, 0x08 /* Private */,
+      11,    2,  423,    2, 0x08 /* Private */,
+      11,    2,  428,    2, 0x08 /* Private */,
+      21,    2,  433,    2, 0x08 /* Private */,
+      22,    2,  438,    2, 0x08 /* Private */,
+      23,    2,  443,    2, 0x08 /* Private */,
+      24,    3,  448,    2, 0x08 /* Private */,
+      25,    2,  455,    2, 0x08 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QVariant,    4,    5,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QString, QMetaType::QVariant,    4,    7,    5,
+
+ // slots: parameters
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QVariant,    4,    5,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QString, QMetaType::QVariant,    4,    7,   10,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Int,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Int, QMetaType::Int,    2,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Int,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Double,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Double, QMetaType::Double,    2,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Double,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Int,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Bool,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QString,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QRegExp,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Int,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QDate,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QDate, QMetaType::QDate,    2,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QTime,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QDateTime,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QKeySequence,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QChar,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QLocale,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QPoint,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QPointF,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QSize,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QSize, QMetaType::QSize,    2,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QSizeF,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QSizeF, QMetaType::QSizeF,    2,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QRect,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QRect,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QRectF,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QRectF,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QColor,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QStringList,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 20,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QSizePolicy,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QFont,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QCursor,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::QStringList,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Bool,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Bool,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3,    2,    2,    2,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3,    2,    2,
 
        0        // eod
-};
-
-static const char qt_meta_stringdata_QtVariantPropertyManager[] = {
-    "QtVariantPropertyManager\0\0property,val\0"
-    "valueChanged(QtProperty*,QVariant)\0"
-    "property,attribute,val\0"
-    "attributeChanged(QtProperty*,QString,QVariant)\0"
-    "setValue(QtProperty*,QVariant)\0"
-    "property,attribute,value\0"
-    "setAttribute(QtProperty*,QString,QVariant)\0"
-    ",\0slotValueChanged(QtProperty*,int)\0"
-    ",,\0slotRangeChanged(QtProperty*,int,int)\0"
-    "slotSingleStepChanged(QtProperty*,int)\0"
-    "slotValueChanged(QtProperty*,double)\0"
-    "slotRangeChanged(QtProperty*,double,double)\0"
-    "slotSingleStepChanged(QtProperty*,double)\0"
-    "slotDecimalsChanged(QtProperty*,int)\0"
-    "slotValueChanged(QtProperty*,bool)\0"
-    "slotValueChanged(QtProperty*,QString)\0"
-    "slotRegExpChanged(QtProperty*,QRegExp)\0"
-    "slotEchoModeChanged(QtProperty*,int)\0"
-    "slotValueChanged(QtProperty*,QDate)\0"
-    "slotRangeChanged(QtProperty*,QDate,QDate)\0"
-    "slotValueChanged(QtProperty*,QTime)\0"
-    "slotValueChanged(QtProperty*,QDateTime)\0"
-    "slotValueChanged(QtProperty*,QKeySequence)\0"
-    "slotValueChanged(QtProperty*,QChar)\0"
-    "slotValueChanged(QtProperty*,QLocale)\0"
-    "slotValueChanged(QtProperty*,QPoint)\0"
-    "slotValueChanged(QtProperty*,QPointF)\0"
-    "slotValueChanged(QtProperty*,QSize)\0"
-    "slotRangeChanged(QtProperty*,QSize,QSize)\0"
-    "slotValueChanged(QtProperty*,QSizeF)\0"
-    "slotRangeChanged(QtProperty*,QSizeF,QSizeF)\0"
-    "slotValueChanged(QtProperty*,QRect)\0"
-    "slotConstraintChanged(QtProperty*,QRect)\0"
-    "slotValueChanged(QtProperty*,QRectF)\0"
-    "slotConstraintChanged(QtProperty*,QRectF)\0"
-    "slotValueChanged(QtProperty*,QColor)\0"
-    "slotEnumNamesChanged(QtProperty*,QStringList)\0"
-    "slotEnumIconsChanged(QtProperty*,QMap<int,QIcon>)\0"
-    "slotValueChanged(QtProperty*,QSizePolicy)\0"
-    "slotValueChanged(QtProperty*,QFont)\0"
-    "slotValueChanged(QtProperty*,QCursor)\0"
-    "slotFlagNamesChanged(QtProperty*,QStringList)\0"
-    "slotReadOnlyChanged(QtProperty*,bool)\0"
-    "slotTextVisibleChanged(QtProperty*,bool)\0"
-    "slotPropertyInserted(QtProperty*,QtProperty*,QtProperty*)\0"
-    "slotPropertyRemoved(QtProperty*,QtProperty*)\0"
 };
 
 void QtVariantPropertyManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        Q_ASSERT(staticMetaObject.cast(_o));
         QtVariantPropertyManager *_t = static_cast<QtVariantPropertyManager *>(_o);
+        Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->valueChanged((*reinterpret_cast< QtProperty*(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2]))); break;
         case 1: _t->attributeChanged((*reinterpret_cast< QtProperty*(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3]))); break;
@@ -179,31 +232,39 @@ void QtVariantPropertyManager::qt_static_metacall(QObject *_o, QMetaObject::Call
         case 42: _t->d_func()->slotPropertyRemoved((*reinterpret_cast< QtProperty*(*)>(_a[1])),(*reinterpret_cast< QtProperty*(*)>(_a[2]))); break;
         default: ;
         }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        void **func = reinterpret_cast<void **>(_a[1]);
+        {
+            typedef void (QtVariantPropertyManager::*_t)(QtProperty * , const QVariant & );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&QtVariantPropertyManager::valueChanged)) {
+                *result = 0;
+            }
+        }
+        {
+            typedef void (QtVariantPropertyManager::*_t)(QtProperty * , const QString & , const QVariant & );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&QtVariantPropertyManager::attributeChanged)) {
+                *result = 1;
+            }
+        }
     }
 }
 
-const QMetaObjectExtraData QtVariantPropertyManager::staticMetaObjectExtraData = {
-    0,  qt_static_metacall 
-};
-
 const QMetaObject QtVariantPropertyManager::staticMetaObject = {
-    { &QtAbstractPropertyManager::staticMetaObject, qt_meta_stringdata_QtVariantPropertyManager,
-      qt_meta_data_QtVariantPropertyManager, &staticMetaObjectExtraData }
+    { &QtAbstractPropertyManager::staticMetaObject, qt_meta_stringdata_QtVariantPropertyManager.data,
+      qt_meta_data_QtVariantPropertyManager,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
-#ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &QtVariantPropertyManager::getStaticMetaObject() { return staticMetaObject; }
-#endif //Q_NO_DATA_RELOCATION
 
 const QMetaObject *QtVariantPropertyManager::metaObject() const
 {
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
 void *QtVariantPropertyManager::qt_metacast(const char *_clname)
 {
-    if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_QtVariantPropertyManager))
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_QtVariantPropertyManager.stringdata0))
         return static_cast<void*>(const_cast< QtVariantPropertyManager*>(this));
     return QtAbstractPropertyManager::qt_metacast(_clname);
 }
@@ -217,6 +278,10 @@ int QtVariantPropertyManager::qt_metacall(QMetaObject::Call _c, int _id, void **
         if (_id < 43)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 43;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 43)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 43;
     }
     return _id;
 }
@@ -224,20 +289,38 @@ int QtVariantPropertyManager::qt_metacall(QMetaObject::Call _c, int _id, void **
 // SIGNAL 0
 void QtVariantPropertyManager::valueChanged(QtProperty * _t1, const QVariant & _t2)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
 void QtVariantPropertyManager::attributeChanged(QtProperty * _t1, const QString & _t2, const QVariant & _t3)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
+struct qt_meta_stringdata_QtVariantEditorFactory_t {
+    QByteArrayData data[1];
+    char stringdata0[23];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_QtVariantEditorFactory_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_QtVariantEditorFactory_t qt_meta_stringdata_QtVariantEditorFactory = {
+    {
+QT_MOC_LITERAL(0, 0, 22) // "QtVariantEditorFactory"
+
+    },
+    "QtVariantEditorFactory"
+};
+#undef QT_MOC_LITERAL
+
 static const uint qt_meta_data_QtVariantEditorFactory[] = {
 
  // content:
-       6,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -250,10 +333,6 @@ static const uint qt_meta_data_QtVariantEditorFactory[] = {
        0        // eod
 };
 
-static const char qt_meta_stringdata_QtVariantEditorFactory[] = {
-    "QtVariantEditorFactory\0"
-};
-
 void QtVariantEditorFactory::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
@@ -262,28 +341,21 @@ void QtVariantEditorFactory::qt_static_metacall(QObject *_o, QMetaObject::Call _
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData QtVariantEditorFactory::staticMetaObjectExtraData = {
-    0,  qt_static_metacall 
-};
-
 const QMetaObject QtVariantEditorFactory::staticMetaObject = {
-    { &QtAbstractEditorFactory<QtVariantPropertyManager>::staticMetaObject, qt_meta_stringdata_QtVariantEditorFactory,
-      qt_meta_data_QtVariantEditorFactory, &staticMetaObjectExtraData }
+    { &QtAbstractEditorFactory<QtVariantPropertyManager>::staticMetaObject, qt_meta_stringdata_QtVariantEditorFactory.data,
+      qt_meta_data_QtVariantEditorFactory,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
-#ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &QtVariantEditorFactory::getStaticMetaObject() { return staticMetaObject; }
-#endif //Q_NO_DATA_RELOCATION
 
 const QMetaObject *QtVariantEditorFactory::metaObject() const
 {
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
 void *QtVariantEditorFactory::qt_metacast(const char *_clname)
 {
-    if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_QtVariantEditorFactory))
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_QtVariantEditorFactory.stringdata0))
         return static_cast<void*>(const_cast< QtVariantEditorFactory*>(this));
     return QtAbstractEditorFactory<QtVariantPropertyManager>::qt_metacast(_clname);
 }
